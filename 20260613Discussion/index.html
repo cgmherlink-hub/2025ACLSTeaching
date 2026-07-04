@@ -1,1 +1,287 @@
 
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>急重症教學模組 20260613</title>
+<style>
+  :root{
+    --bg: #0e1620;
+    --panel: #142230;
+    --line: #24384a;
+    --ink: #eaf2f7;
+    --ink-dim: #9db2c2;
+    --accent: #3fb8af;
+    --accent-soft: rgba(63,184,175,0.14);
+    --mono: 'IBM Plex Mono', 'Courier New', monospace;
+    --sans: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    min-height:100vh;
+  }
+  .layout{
+    display:flex;
+    min-height:100vh;
+  }
+  /* Sidebar */
+  nav.rail{
+    width:260px;
+    flex-shrink:0;
+    background:var(--panel);
+    border-right:1px solid var(--line);
+    padding:32px 0;
+    position:sticky;
+    top:0;
+    height:100vh;
+    overflow-y:auto;
+  }
+  .rail-header{
+    padding:0 24px 24px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:12px;
+  }
+  .rail-header .eyebrow{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.14em;
+    color:var(--accent);
+    text-transform:uppercase;
+  }
+  .rail-header h1{
+    font-size:19px;
+    margin:8px 0 0;
+    font-weight:600;
+    line-height:1.3;
+  }
+  .rail-header .rail-date{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--ink-dim);
+    margin-top:10px;
+    letter-spacing:0.04em;
+  }
+  .rail-list{
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+  .rail-item{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    width:100%;
+    padding:14px 24px;
+    background:none;
+    border:none;
+    border-left:3px solid transparent;
+    color:var(--ink-dim);
+    font-family:var(--sans);
+    font-size:14.5px;
+    cursor:pointer;
+    text-align:left;
+    transition:background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .rail-item .num{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--ink-dim);
+    min-width:20px;
+  }
+  .rail-item:hover{
+    background:rgba(255,255,255,0.03);
+    color:var(--ink);
+  }
+  .rail-item.active{
+    background:var(--accent-soft);
+    color:var(--ink);
+    border-left-color:var(--accent);
+  }
+  .rail-item.active .num{
+    color:var(--accent);
+  }
+
+  /* Main */
+  main{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    min-width:0;
+  }
+  header.topbar{
+    padding:28px 40px 20px;
+    border-bottom:1px solid var(--line);
+  }
+  header.topbar .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--accent);
+    letter-spacing:0.1em;
+  }
+  header.topbar h2{
+    margin:6px 0 0;
+    font-size:26px;
+    font-weight:600;
+  }
+  .stage{
+    flex:1;
+    padding:32px 40px 48px;
+    display:flex;
+    justify-content:center;
+  }
+  .frame-wrap{
+    width:100%;
+    max-width:1280px;
+  }
+  .frame-shell{
+    position:relative;
+    width:100%;
+    aspect-ratio:1280/749;
+    background:#000;
+    border:1px solid var(--line);
+    border-radius:6px;
+    overflow:hidden;
+    box-shadow:0 20px 50px -20px rgba(0,0,0,0.6);
+  }
+  .frame-shell iframe{
+    position:absolute;
+    top:0; left:0;
+    width:100%;
+    height:100%;
+    border:0;
+  }
+  .slide-panel{ display:none; }
+  .slide-panel.active{ display:block; }
+
+  .hint{
+    margin-top:14px;
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--ink-dim);
+  }
+
+  @media (max-width: 860px){
+    .layout{flex-direction:column;}
+    nav.rail{
+      width:100%;
+      height:auto;
+      position:relative;
+      border-right:none;
+      border-bottom:1px solid var(--line);
+      padding:20px 0;
+    }
+    .rail-list{
+      display:flex;
+      overflow-x:auto;
+    }
+    .rail-item{
+      padding:10px 18px;
+      border-left:none;
+      border-bottom:3px solid transparent;
+      white-space:nowrap;
+    }
+    .rail-item.active{
+      border-left-color:transparent;
+      border-bottom-color:var(--accent);
+    }
+    header.topbar, .stage{ padding-left:20px; padding-right:20px; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+  <nav class="rail" aria-label="模組列表">
+    <div class="rail-header">
+      <div class="eyebrow">教學模組 · Modules</div>
+      <h1>急重症簡報總覽</h1>
+      <div class="rail-date">2026.06.13</div>
+    </div>
+    <ul class="rail-list" id="railList">
+      <li><button class="rail-item active" data-target="p03"><span class="num">03</span><span>Mega</span></button></li>
+      <li><button class="rail-item" data-target="p04"><span class="num">04</span><span>PEA</span></button></li>
+      <li><button class="rail-item" data-target="p06"><span class="num">06</span><span>Bradycardia</span></button></li>
+      <li><button class="rail-item" data-target="p07"><span class="num">07</span><span>Tachycardia</span></button></li>
+      <li><button class="rail-item" data-target="p08"><span class="num">08</span><span>ACS</span></button></li>
+    </ul>
+  </nav>
+
+  <main>
+    <header class="topbar">
+      <div class="eyebrow" id="topEyebrow">MODULE 03</div>
+      <h2 id="topTitle">Mega</h2>
+    </header>
+    <div class="stage">
+      <div class="frame-wrap">
+
+        <div class="slide-panel active" id="p03">
+          <div class="frame-shell">
+            <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTyf9MBRqutf94Fb-msU5FoZa0qRKTkD1lqsvSjUuesvlyVFUJ8VHyKTflVV4CHNg/pubembed?start=true&loop=true&delayms=3000" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+          </div>
+        </div>
+
+        <div class="slide-panel" id="p04">
+          <div class="frame-shell">
+            <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQch4EDCEtSBXTNVf-7COY09Vf7Z5U-ubgcjnhvFSe6-uAXsWrqxM1XbQaeO31GwQ/pubembed?start=true&loop=true&delayms=3000" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+          </div>
+        </div>
+
+        <div class="slide-panel" id="p06">
+          <div class="frame-shell">
+            <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQch4EDCEtSBXTNVf-7COY09Vf7Z5U-ubgcjnhvFSe6-uAXsWrqxM1XbQaeO31GwQ/pubembed?start=true&loop=true&delayms=3000" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+          </div>
+        </div>
+
+        <div class="slide-panel" id="p07">
+          <div class="frame-shell">
+            <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vR5dha9iXCMCZqF7V62sw6CdosbPmEyvdbVHYJybCyxQj8tRbbufqsDkkwtKfufpQ/pubembed?start=true&loop=true&delayms=3000" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+          </div>
+        </div>
+
+        <div class="slide-panel" id="p08">
+          <div class="frame-shell">
+            <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQ_QED2b2aavnbxBVJUU-lcsJ4GQi2sFNCxepqsnb8-E6dLwnzy_Nkyv0yD1mQUog/pubembed?start=true&loop=true&delayms=3000" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+          </div>
+        </div>
+
+        <div class="hint">簡報會自動輪播（每 3 秒切換一張）。左側可切換模組。</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+  const titles = {
+    p03: { eyebrow: 'MODULE 03', title: 'Mega' },
+    p04: { eyebrow: 'MODULE 04', title: 'PEA' },
+    p06: { eyebrow: 'MODULE 06', title: 'Bradycardia' },
+    p07: { eyebrow: 'MODULE 07', title: 'Tachycardia' },
+    p08: { eyebrow: 'MODULE 08', title: 'ACS' },
+  };
+
+  const buttons = document.querySelectorAll('.rail-item');
+  const panels = document.querySelectorAll('.slide-panel');
+  const topEyebrow = document.getElementById('topEyebrow');
+  const topTitle = document.getElementById('topTitle');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.target;
+
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      panels.forEach(p => p.classList.remove('active'));
+      document.getElementById(target).classList.add('active');
+
+      topEyebrow.textContent = titles[target].eyebrow;
+      topTitle.textContent = titles[target].title;
+    });
+  });
+</script>
+</body>
+</html>
