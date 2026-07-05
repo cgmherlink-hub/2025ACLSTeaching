@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 版 ACLS 手冊 — 線上閱讀</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700;900&family=Noto+Sans+TC:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #C0392B;
+    --red-dark: #922B21;
+    --cream: #FAF7F2;
+    --ink: #1A1008;
+    --ink-soft: #3D2B1F;
+    --gold: #C9A84C;
+    --gold-light: #F0D080;
+    --gray: #8C7B6E;
+    --gray-light: #EDE8E0;
+    --white: #FFFFFF;
+    --border: #D4C8B8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+  }
+
+  header.top {
+    background: var(--ink);
+    color: var(--white);
+    padding: 32px 40px;
+    border-bottom: 3px solid var(--gold);
+  }
+  .top-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--red-light, #E74C3C);
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-family: 'Noto Serif TC', serif;
+    font-weight: 900;
+    font-size: clamp(26px, 4vw, 38px);
+    line-height: 1.2;
+  }
+  .top-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--gold-light);
+    letter-spacing: 1px;
+  }
+  a.back-link {
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    font-size: 13px;
+    font-family: 'DM Mono', monospace;
+  }
+  a.back-link:hover { color: var(--gold); }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 40px 40px 100px; }
+
+  .toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary {
+    background: var(--red);
+    color: var(--white);
+    box-shadow: 0 6px 16px -8px rgba(192,57,43,0.6);
+  }
+  .btn-primary:hover { background: var(--red-dark); }
+  .btn-outline {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--border);
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--red); }
+
+  .viewer-shell {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--white);
+    box-shadow: 0 20px 50px -30px rgba(0,0,0,0.35);
+  }
+  .viewer-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 18px;
+    background: var(--gray-light);
+    border-bottom: 1px solid var(--border);
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--gray);
+  }
+  .viewer-bar .dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--red);
+    margin-right: 8px;
+  }
+  .pdf-frame {
+    width: 100%;
+    height: 85vh;
+    border: 0;
+    display: block;
+    background: #525659;
+  }
+
+  .fallback {
+    padding: 40px;
+    text-align: center;
+    color: var(--gray);
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  .note {
+    margin-top: 18px;
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.8;
+  }
+  .note a { color: var(--red); text-decoration: none; }
+  .note a:hover { text-decoration: underline; }
+
+  footer {
+    text-align: center;
+    padding: 30px;
+    font-size: 12px;
+    color: var(--gray);
+    font-family: 'DM Mono', monospace;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 640px) {
+    header.top, main { padding-left: 20px; padding-right: 20px; }
+    .pdf-frame { height: 70vh; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <div>
+      <div class="eyebrow">ACLS Manual · 手冊</div>
+      <h1>2026 版 ACLS 手冊</h1>
+      <div class="top-meta">final_v4 · 線上閱讀 / 下載</div>
+    </div>
+    <a class="back-link" href="../index.html">← 回到總覽首頁</a>
+  </div>
+</header>
+
+<main>
+  <div class="toolbar">
+    <a class="btn btn-primary" href="2026版_ACLS手冊_final_v4.pdf" download="2026版_ACLS手冊_final_v4.pdf">
+      ⬇ 下載 PDF 手冊
+    </a>
+    <a class="btn btn-outline" href="2026版_ACLS手冊_final_v4.pdf" target="_blank" rel="noopener">
+      ↗ 於新分頁開啟
+    </a>
+    <a class="btn btn-outline" href="2026_ACLS_Manual.html" target="_blank" rel="noopener">
+      🌐 開啟網頁純文字版
+    </a>
+  </div>
+
+  <div class="viewer-shell">
+    <div class="viewer-bar">
+      <span><span class="dot"></span>2026版_ACLS手冊_final_v4.pdf</span>
+      <span>PDF Viewer</span>
+    </div>
+    <iframe class="pdf-frame" src="2026版_ACLS手冊_final_v4.pdf" title="2026 版 ACLS 手冊">
+      <div class="fallback">
+        您的瀏覽器不支援內嵌 PDF 檢視。<br>
+        請改用上方「下載 PDF 手冊」或「於新分頁開啟」按鈕查看內容。
+      </div>
+    </iframe>
+  </div>
+
+  <p class="note">
+    若手機瀏覽器無法正常顯示內嵌 PDF，請點擊「於新分頁開啟」或直接下載檔案。<br>
+    純文字網頁版（<a href="2026_ACLS_Manual.html" target="_blank" rel="noopener">2026_ACLS_Manual.html</a>）檔案較大，載入時間可能較長，建議使用桌機瀏覽。
+  </p>
+</main>
+
+<footer>
+  © 2026 · ACLS Manual · 僅供教育與參考用途
+</footer>
+
+</body>
+</html>
