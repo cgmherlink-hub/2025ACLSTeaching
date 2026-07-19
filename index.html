@@ -21,16 +21,13 @@
     --border: #D4C8B8;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
-
   body {
     font-family: 'Noto Sans TC', sans-serif;
     background: var(--cream);
     color: var(--ink);
     overflow-x: hidden;
   }
-
   /* ── HERO ── */
   .hero {
     position: relative;
@@ -168,7 +165,6 @@
     0%,100%{transform:translateX(-50%) translateY(0)}
     50%{transform:translateX(-50%) translateY(8px)}
   }
-
   /* ── NAV ── */
   nav {
     position: sticky;
@@ -212,11 +208,9 @@
     letter-spacing: 0.5px;
   }
   .nav-links a:hover { color: var(--gold); }
-
   /* ── SECTIONS ── */
   section { padding: 100px 40px; }
   .container { max-width: 1100px; margin: 0 auto; }
-
   .section-label {
     font-family: 'DM Mono', monospace;
     font-size: 11px;
@@ -251,7 +245,6 @@
     max-width: 640px;
     margin-bottom: 60px;
   }
-
   /* ── OVERVIEW ── */
   .overview { background: var(--cream); }
   .overview-grid {
@@ -301,7 +294,6 @@
     margin-bottom: 16px;
     letter-spacing: 1px;
   }
-
   /* ── CHANGES ── */
   .changes { background: var(--ink); color: var(--white); }
   .changes h2 { color: var(--white); }
@@ -370,7 +362,6 @@
   .tag-new { color: #52D68A; border-color: rgba(82,214,138,0.3); }
   .tag-revised { color: var(--gold-light); border-color: rgba(240,208,128,0.3); }
   .tag-emphasis { color: #7EC8E3; border-color: rgba(126,200,227,0.3); }
-
   /* ── ALGORITHMS ── */
   .algorithms { background: #F5F0E8; }
   .algo-cards {
@@ -433,7 +424,6 @@
     flex-shrink: 0;
     margin-top: 1px;
   }
-
   /* ── DRUGS ── */
   .drugs { background: var(--cream); }
   .drug-table-wrap {
@@ -491,7 +481,6 @@
     border: 1px solid rgba(82,214,138,0.25);
     letter-spacing: 1px;
   }
-
   /* ── CHAIN ── */
   .chain-section { background: #F5F0E8; }
   .chain-visual {
@@ -556,7 +545,6 @@
   }
   .chain-link.unified h4 { color: var(--gold); margin-bottom: 4px; }
   .chain-link.unified p { color: rgba(255,255,255,0.45); }
-
   /* ── DOWNLOAD ── */
   .download-section {
     background: linear-gradient(135deg, var(--red-dark) 0%, #7B0000 100%);
@@ -677,7 +665,6 @@
     margin-left: 16px;
   }
   .btn-secondary:hover { background: rgba(255,255,255,0.1); color: var(--white); }
-
   /* ── CERTIFICATION ── */
   .cert-section { background: var(--cream); }
   .cert-cards {
@@ -713,12 +700,10 @@
     color: var(--red);
     font-weight: 500;
   }
-
   /* ── DISCUSSION RESOURCES (NEW) ── */
   .discussion-section { background: var(--ink); color: var(--white); }
   .discussion-section h2 { color: var(--white); }
   .discussion-section .section-intro { color: rgba(255,255,255,0.45); }
-
   .discussion-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -758,7 +743,6 @@
   .dc-type.pdf  { background: rgba(224,96,80,0.15);   color: #F09080; border: 1px solid rgba(224,96,80,0.25); }
   .dc-type.html { background: rgba(80,180,224,0.15);  color: #80D0F0; border: 1px solid rgba(80,180,224,0.25); }
   .dc-type.img  { background: rgba(80,200,120,0.15);  color: #80E0A0; border: 1px solid rgba(80,200,120,0.25); }
-
   .discussion-card .dc-title {
     font-family: 'Noto Serif TC', serif;
     font-size: 16px;
@@ -784,7 +768,6 @@
     transition: gap 0.2s;
   }
   .discussion-card:hover .dc-action { gap: 10px; }
-
   /* image gallery strip */
   .img-strip {
     display: flex;
@@ -811,7 +794,6 @@
     border-color: rgba(80,200,120,0.25);
     color: #80E0A0;
   }
-
   /* ── FOOTER ── */
   footer {
     background: var(--ink);
@@ -850,7 +832,6 @@
     color: rgba(255,255,255,0.3);
     margin-top: 24px;
   }
-
   /* ── ANIMATIONS ── */
   @keyframes fadeUp {
     from { opacity:0; transform:translateY(30px); }
@@ -863,7 +844,6 @@
   .hero-content > *:nth-child(2){ animation-delay:.2s }
   .hero-content > *:nth-child(3){ animation-delay:.3s }
   .hero-content > *:nth-child(4){ animation-delay:.4s }
-
   @media(max-width:768px){
     section { padding: 64px 20px; }
     .hero-content { padding: 60px 20px 100px; }
@@ -879,7 +859,6 @@
 </style>
 </head>
 <body>
-
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
@@ -896,7 +875,6 @@
     </ul>
   </div>
 </nav>
-
 <!-- HERO -->
 <section class="hero">
   <div class="hero-grid"></div>
@@ -930,7 +908,6 @@
       </div>
     </div>
   </div>
-
   <!-- ECG Line SVG decoration -->
   <svg class="hero-ecg" viewBox="0 0 1400 120" preserveAspectRatio="none" fill="none">
     <polyline stroke="#C0392B" stroke-width="1.5" fill="none"
@@ -943,7 +920,6 @@
     SCROLL
   </div>
 </section>
-
 <!-- OVERVIEW -->
 <section class="overview" id="overview">
   <div class="container">
@@ -992,7 +968,6 @@
     </div>
   </div>
 </section>
-
 <!-- KEY CHANGES -->
 <section class="changes" id="changes">
   <div class="container">
@@ -1003,7 +978,6 @@
       若您已持有 2020 版認證，這些差異是再認證課程的重中之重。
     </p>
     <div class="changes-list">
-
       <div class="change-item" data-num="01">
         <div class="change-icon">⛓️</div>
         <h3>統一生命鏈</h3>
@@ -1011,7 +985,6 @@
         成人與兒科共用同一心理模型，降低跨場域混淆。</p>
         <span class="change-tag tag-new">NEW</span>
       </div>
-
       <div class="change-item" data-num="02">
         <div class="change-icon">💊</div>
         <h3>Epinephrine 給藥時機精修</h3>
@@ -1020,7 +993,6 @@
         VF/pVT 流程亦對藥物順序有更精確說明。</p>
         <span class="change-tag tag-revised">REVISED</span>
       </div>
-
       <div class="change-item" data-num="03">
         <div class="change-icon">🫁</div>
         <h3>通氣管理——避免過度換氣</h3>
@@ -1028,7 +1000,6 @@
         明確設定通氣頻率上限以避免 hyperventilation 對腦灌流的負面影響。</p>
         <span class="change-tag tag-emphasis">EMPHASIS</span>
       </div>
-
       <div class="change-item" data-num="04">
         <div class="change-icon">❤️‍🔥</div>
         <h3>心動過緩 / 心動過速演算法更新</h3>
@@ -1037,7 +1008,6 @@
         明確何時需立即電擊、何時可先藥物處理。</p>
         <span class="change-tag tag-revised">REVISED</span>
       </div>
-
       <div class="change-item" data-num="05">
         <div class="change-icon">🧠</div>
         <h3>心臟驟停後照護強化</h3>
@@ -1046,7 +1016,6 @@
         及加護病房管理細節。</p>
         <span class="change-tag tag-revised">REVISED</span>
       </div>
-
       <div class="change-item" data-num="06">
         <div class="change-icon">👥</div>
         <h3>人因與團隊動態成為核心</h3>
@@ -1055,7 +1024,6 @@
         角色透明度與適應性領導，強調非技術技能。</p>
         <span class="change-tag tag-new">NEW EMPHASIS</span>
       </div>
-
       <div class="change-item" data-num="07">
         <div class="change-icon">📊</div>
         <h3>生理監測融入 CPR 品質評估</h3>
@@ -1064,7 +1032,6 @@
         考慮動脈壓監測以優化胸壓品質與血管加壓劑治療。</p>
         <span class="change-tag tag-emphasis">EMPHASIS</span>
       </div>
-
       <div class="change-item" data-num="08">
         <div class="change-icon">🩺</div>
         <h3>腦中風演算法——溶栓藥物更新</h3>
@@ -1072,11 +1039,9 @@
         明確在疑似或確認肺栓塞引起心臟驟停時的處置順序。</p>
         <span class="change-tag tag-new">NEW</span>
       </div>
-
     </div>
   </div>
 </section>
-
 <!-- ALGORITHMS -->
 <section class="algorithms" id="algorithms">
   <div class="container">
@@ -1087,7 +1052,6 @@
       每個模組含建議表格、簡述、依據及文獻連結。
     </p>
     <div class="algo-cards">
-
       <div class="algo-card cardiac">
         <h3>💓 成人心臟驟停 (VF/pVT)</h3>
         <p>不可電擊節律（PEA / Asystole）與可電擊節律的分流處置</p>
@@ -1100,7 +1064,6 @@
           <div class="algo-step"><div class="step-dot">6</div><span>持續治療 H's & T's（可逆原因）</span></div>
         </div>
       </div>
-
       <div class="algo-card brady">
         <h3>📉 症狀性心動過緩</h3>
         <p>HR &lt;50 bpm 伴血動力學不穩定或症狀</p>
@@ -1112,7 +1075,6 @@
           <div class="algo-step"><div class="step-dot">5</div><span>尋找並治療可逆原因</span></div>
         </div>
       </div>
-
       <div class="algo-card tachy">
         <h3>📈 症狀性心動過速</h3>
         <p>HR &gt;150 bpm 伴血動力學不穩定</p>
@@ -1124,7 +1086,6 @@
           <div class="algo-step"><div class="step-dot">5</div><span>2025 更新：穩定 vs 不穩定判定閾值更明確</span></div>
         </div>
       </div>
-
       <div class="algo-card postarrest">
         <h3>🏥 心臟驟停後照護</h3>
         <p>ROSC 後的系統性照護（2025 版重點強化）</p>
@@ -1136,7 +1097,6 @@
           <div class="algo-step"><div class="step-dot">5</div><span>神經學預後評估 ≥72 小時後進行</span></div>
         </div>
       </div>
-
       <div class="algo-card stroke">
         <h3>🧠 急性腦中風</h3>
         <p>含 2025 新增溶栓藥物節點</p>
@@ -1148,7 +1108,6 @@
           <div class="algo-step"><div class="step-dot">5</div><span>大血管阻塞考慮機械取栓（EVT）</span></div>
         </div>
       </div>
-
       <div class="algo-card hs">
         <h3>🔍 H's & T's 可逆原因</h3>
         <p>使用 POCUS 輔助快速診斷</p>
@@ -1159,11 +1118,9 @@
           <div class="algo-step"><div class="step-dot">💉</div><span>PE 確認 → 考慮 Alteplase 50–100 mg IV</span></div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
-
 <!-- DRUGS -->
 <section class="drugs" id="drugs">
   <div class="container">
@@ -1237,7 +1194,6 @@
     </div>
   </div>
 </section>
-
 <!-- CHAIN OF SURVIVAL -->
 <section class="chain-section" id="chain">
   <div class="container">
@@ -1294,7 +1250,6 @@
     </div>
   </div>
 </section>
-
 <!-- DOWNLOAD -->
 <section class="download-section" id="download">
   <div class="container">
@@ -1322,7 +1277,6 @@
     </div>
     <div class="download-right">
       <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;color:rgba(255,255,255,0.3);text-transform:uppercase;margin-bottom:20px;">可下載資源</div>
-
       <div class="download-file-item">
         <div class="file-icon">📄</div>
         <div class="file-info">
@@ -1331,7 +1285,6 @@
         </div>
         <a href="20260509Discussion/2026版_ACLS手冊_final_v4.pdf" class="btn-download" download="2026版_ACLS手冊_final_v4.pdf">⬇ 下載</a>
       </div>
-
       <div class="download-file-item">
         <div class="file-icon">📊</div>
         <div class="file-info">
@@ -1340,7 +1293,6 @@
         </div>
         <a href="20260509Discussion/2025_Resuscitation_Blueprint.pptx" class="btn-download" download="2025_Resuscitation_Blueprint.pptx">⬇ 下載</a>
       </div>
-
       <div class="download-file-item">
         <div class="file-icon">🩺</div>
         <div class="file-info">
@@ -1349,7 +1301,6 @@
         </div>
         <a href="20260509Discussion/AHA_2025_Clinical_Delta.pptx" class="btn-download" download="AHA_2025_Clinical_Delta.pptx">⬇ 下載</a>
       </div>
-
       <div class="download-file-item">
         <div class="file-icon">❤️</div>
         <div class="file-info">
@@ -1358,7 +1309,6 @@
         </div>
         <a href="https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/algorithms" target="_blank" rel="noopener" class="btn-download">前往</a>
       </div>
-
       <div class="download-file-item">
         <div class="file-icon">📰</div>
         <div class="file-info">
@@ -1367,85 +1317,78 @@
         </div>
         <a href="https://www.ahajournals.org/doi/10.1161/CIR.0000000000001376" target="_blank" rel="noopener" class="btn-download">閱讀</a>
       </div>
-
       <div style="margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.08);font-size:12px;color:rgba(255,255,255,0.25);line-height:1.6;">
         ⚠ 本手冊僅供教育與參考用途，實際臨床決策應以 AHA 官方完整指引為準。
       </div>
     </div>
   </div>
 </section>
-
 <!-- ══ 20260509 DISCUSSION RESOURCES (NEW SECTION) ══ -->
 <section class="discussion-section" id="discussion">
   <div class="container">
-    <div class="section-label" style="color:#F08070">20260509 討論資源</div>
+    <div class="section-label" style="color:#F08070">討論資源</div>
     <h2>討論會資料包</h2>
     <p class="section-intro">
-      以下資源為 2026 年 5 月 9 日 ACLS 討論會所使用的教學素材，
+      以下資源為歷次 ACLS 討論會所使用的教學素材，
       包含簡報、手冊、教學頁面及參考圖片，供與會人員課後複習使用。
     </p>
-
     <!-- 主要文件卡片 -->
     <div class="discussion-grid">
-
+      <a class="discussion-card" href="20260725ACLSDiscussion/ACLS20260725.html" target="_blank" rel="noopener">
+        <span class="dc-type html">🌐 HTML</span>
+        <div class="dc-title">20260725 ACLS 討論會教材</div>
+        <div class="dc-desc">2026 年 7 月 25 日 ACLS 討論會教學頁面，整理當次會議重點內容，可直接在瀏覽器中開啟閱讀。</div>
+        <span class="dc-action">🔗 開啟頁面 →</span>
+      </a>
       <a class="discussion-card" href="20260613Discussion/ACS_20260613.html" target="_blank" rel="noopener">
         <span class="dc-type html">🌐 HTML</span>
         <div class="dc-title">急性冠心症 (ACS) 臨床診療指南</div>
         <div class="dc-desc">2026 年 6 月 13 日討論會教材，整理急性冠心症（Acute Coronary Syndrome）的臨床診斷與治療流程，含案例說明，可直接在瀏覽器中開啟閱讀。</div>
         <span class="dc-action">🔗 開啟頁面 →</span>
       </a>
-
       <a class="discussion-card" href="20260509Discussion/20260509Edition.html" target="_blank" rel="noopener">
         <span class="dc-type html">🌐 HTML</span>
         <div class="dc-title">20260509 Edition 完整版頁面</div>
         <div class="dc-desc">2026 年 5 月 9 日討論會的完整教學總覽頁面，整合當次會議所用之重點內容，可直接在瀏覽器中開啟閱讀。</div>
         <span class="dc-action">🔗 開啟頁面 →</span>
       </a>
-
       <a class="discussion-card" href="20260509Discussion/2026版_ACLS手冊_final_v4.pdf" download="2026版_ACLS手冊_final_v4.pdf">
         <span class="dc-type pdf">📄 PDF</span>
         <div class="dc-title">2026版 ACLS 手冊 final_v4</div>
         <div class="dc-desc">完整版 ACLS 教學手冊，含全套演算法、藥物速查表、Megacode 情境與 H's &amp; T's 口訣。</div>
         <span class="dc-action">⬇ 直接下載 →</span>
       </a>
-
       <a class="discussion-card" href="20260509Discussion/2025_Resuscitation_Blueprint.pptx" download="2025_Resuscitation_Blueprint.pptx">
         <span class="dc-type pptx">📊 PPTX</span>
         <div class="dc-title">2025 Resuscitation Blueprint</div>
         <div class="dc-desc">復甦科學藍圖簡報，涵蓋 AHA 2025 版核心架構與教學設計思路，適合教師與進階學員。</div>
         <span class="dc-action">⬇ 直接下載 →</span>
       </a>
-
       <a class="discussion-card" href="20260509Discussion/AHA_2025_Clinical_Delta.pptx" download="AHA_2025_Clinical_Delta.pptx">
         <span class="dc-type pptx">📊 PPTX</span>
         <div class="dc-title">AHA 2025 Clinical Delta</div>
         <div class="dc-desc">系統性整理 2020 → 2025 各演算法的臨床變更差異，快速掌握再認證重點，聚焦更新幅度最大的項目。</div>
         <span class="dc-action">⬇ 直接下載 →</span>
       </a>
-
       <a class="discussion-card" href="20260509Discussion/Topic1.html" target="_blank" rel="noopener">
         <span class="dc-type html">🌐 HTML</span>
         <div class="dc-title">Topic 1 教學頁面</div>
         <div class="dc-desc">互動式教學網頁，Topic 1 主題詳解，含圖示與重點摘要，可直接在瀏覽器中閱讀。</div>
         <span class="dc-action">🔗 開啟頁面 →</span>
       </a>
-
       <a class="discussion-card" href="20260509Discussion/Topic2.html" target="_blank" rel="noopener">
         <span class="dc-type html">🌐 HTML</span>
         <div class="dc-title">Topic 2 教學頁面</div>
         <div class="dc-desc">互動式教學網頁，Topic 2 主題詳解，含圖示與重點摘要，可直接在瀏覽器中閱讀。</div>
         <span class="dc-action">🔗 開啟頁面 →</span>
       </a>
-
       <a class="discussion-card" href="20260509Discussion/Topic3.html" target="_blank" rel="noopener">
         <span class="dc-type html">🌐 HTML</span>
         <div class="dc-title">Topic 3 教學頁面</div>
         <div class="dc-desc">互動式教學網頁，Topic 3 主題詳解，含圖示與重點摘要，可直接在瀏覽器中閱讀。</div>
         <span class="dc-action">🔗 開啟頁面 →</span>
       </a>
-
     </div>
-
     <!-- 參考圖片列表 -->
     <div style="margin-top: 8px;">
       <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:16px;">參考圖片資源</div>
@@ -1457,10 +1400,8 @@
         <a class="img-thumb" href="20260509Discussion/unnamed (5).png" target="_blank" rel="noopener">🖼 圖片 5</a>
       </div>
     </div>
-
   </div>
 </section>
-
 <!-- CERTIFICATION -->
 <section class="cert-section" id="certification">
   <div class="container">
@@ -1517,7 +1458,6 @@
     </div>
   </div>
 </section>
-
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
@@ -1544,6 +1484,5 @@
     </div>
   </div>
 </footer>
-
 </body>
 </html>
