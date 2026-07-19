@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>20260725 ACLS 教學教材 SharePoint</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy: #0B2545;
+    --navy-deep: #071A33;
+    --paper: #F4F7FA;
+    --panel: #FFFFFF;
+    --line: #D8E0E9;
+    --ink: #10233F;
+    --ink-soft: #4C5F73;
+    --crimson: #C8102E;
+    --crimson-deep: #97051C;
+    --teal: #0E7C61;
+    --amber: #C9862B;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{background:var(--paper); color:var(--ink); font-family:'Inter','Noto Sans TC',sans-serif; -webkit-font-smoothing:antialiased;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  a{color:inherit;}
+
+  /* ---------- Top bar ---------- */
+  .topbar{
+    background:var(--navy-deep);
+    color:#DCE6F0;
+    font-family:'IBM Plex Mono','Noto Sans TC', monospace;
+    font-size:12px;
+    letter-spacing:.04em;
+    padding:7px 32px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .topbar .path{opacity:.7;}
+  .topbar .status{display:flex; align-items:center; gap:8px; color:#8FE3C0;}
+  .status-dot{width:7px; height:7px; border-radius:50%; background:#2FE39A; box-shadow:0 0 0 3px rgba(47,227,154,.18); animation:pulse-dot 2.4s ease-in-out infinite;}
+  @keyframes pulse-dot{0%,100%{opacity:1;} 50%{opacity:.35;}}
+
+  /* ---------- Header ---------- */
+  header.site{
+    background: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+    color:#fff;
+    padding:38px 32px 34px;
+    position:relative;
+    overflow:hidden;
+    border-bottom:3px solid var(--crimson);
+  }
+  header.site::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0, rgba(255,255,255,.035) 1px, transparent 1px, transparent 28px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,.035) 0, rgba(255,255,255,.035) 1px, transparent 1px, transparent 28px);
+    pointer-events:none;
+  }
+  .header-inner{max-width:1180px; margin:0 auto; position:relative; display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap;}
+  .eyebrow{
+    font-family:'IBM Plex Mono','Noto Sans TC', monospace;
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--crimson);
+    background:rgba(200,16,46,.14);
+    border:1px solid rgba(200,16,46,.4);
+    display:inline-block;
+    padding:4px 10px;
+    border-radius:3px;
+    margin-bottom:14px;
+  }
+  h1.site-title{
+    font-family:'Space Grotesk','Noto Sans TC', sans-serif;
+    font-weight:700;
+    font-size:clamp(28px, 4vw, 42px);
+    line-height:1.1;
+    letter-spacing:-.01em;
+  }
+  h1.site-title .accent{color:#8FE3C0;}
+  .site-sub{
+    font-family:'Inter','Noto Sans TC', sans-serif;
+    color:#B8C7DA;
+    font-size:15px;
+    margin-top:10px;
+    max-width:560px;
+  }
+  .rev-date{
+    text-align:right;
+    font-family:'IBM Plex Mono','Noto Sans TC', monospace;
+    color:#B8C7DA;
+    font-size:12.5px;
+    line-height:1.7;
+  }
+  .rev-date b{display:block; color:#fff; font-size:20px; font-family:'Space Grotesk',sans-serif; letter-spacing:.02em;}
+
+  /* ---------- Layout ---------- */
+  main{max-width:1180px; margin:0 auto; padding:44px 32px 80px;}
+
+  .lead{
+    display:flex;
+    justify-content:space-between;
+    gap:40px;
+    margin-bottom:36px;
+    flex-wrap:wrap;
+  }
+  .lead h2{
+    font-family:'Space Grotesk','Noto Sans TC', sans-serif;
+    font-size:22px;
+    font-weight:600;
+    margin-bottom:10px;
+  }
+  .lead p{color:var(--ink-soft); font-size:15px; line-height:1.65; max-width:640px;}
+
+  .lead-meta{
+    font-family:'IBM Plex Mono','Noto Sans TC', monospace;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    display:grid;
+    grid-template-columns:auto auto;
+    gap:4px 14px;
+    align-self:flex-start;
+    padding-top:4px;
+  }
+  .lead-meta span.k{color:#8AA0B8;}
+  .lead-meta span.v{color:var(--navy); font-weight:500;}
+
+  /* ---------- Monitor frame (signature element) ---------- */
+  .monitor-wrap{
+    background:var(--navy-deep);
+    border-radius:14px;
+    padding:0;
+    box-shadow: 0 20px 50px -20px rgba(7,26,51,.55), 0 0 0 1px rgba(255,255,255,.04) inset;
+    overflow:hidden;
+    margin-bottom:46px;
+  }
+  .monitor-bezel{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 18px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .monitor-lights{display:flex; gap:8px;}
+  .monitor-lights span{width:9px; height:9px; border-radius:50%; display:inline-block;}
+  .monitor-lights span:nth-child(1){background:var(--crimson);}
+  .monitor-lights span:nth-child(2){background:var(--amber);}
+  .monitor-lights span:nth-child(3){background:var(--teal);}
+  .monitor-label{
+    font-family:'IBM Plex Mono','Noto Sans TC', monospace;
+    color:#8FE3C0;
+    font-size:12px;
+    letter-spacing:.08em;
+  }
+  .ecg-strip{
+    height:46px;
+    background:#061323;
+    overflow:hidden;
+    position:relative;
+    border-bottom:1px solid rgba(255,255,255,.06);
+  }
+  .ecg-strip svg{position:absolute; top:0; left:0; height:100%; width:200%;}
+  .ecg-strip path{
+    fill:none;
+    stroke:#2FE39A;
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
+  .ecg-strip .trace{
+    animation:scroll-ecg 6s linear infinite;
+  }
+  @keyframes scroll-ecg{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+  .embed-frame{
+    background:#000;
+    padding:14px;
+  }
+  .embed-frame .aspect{
+    position:relative;
+    width:100%;
+    padding-top:58.5%; /* matches 1280x749 ratio */
+    border-radius:4px;
+    overflow:hidden;
+  }
+  .embed-frame iframe{
+    position:absolute; top:0; left:0;
+    width:100%; height:100%;
+    border:0;
+  }
+  .monitor-footer{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 18px 14px;
+    font-family:'IBM Plex Mono','Noto Sans TC', monospace;
+    font-size:11.5px;
+    color:#6E85A0;
+  }
+
+  /* ---------- Quick links grid ---------- */
+  .section-title{
+    font-family:'Space Grotesk','Noto Sans TC', sans-serif;
+    font-size:13px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:16px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .section-title::after{content:""; flex:1; height:1px; background:var(--line);}
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px, 1fr));
+    gap:16px;
+    margin-bottom:46px;
+  }
+  .card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:20px;
+    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    position:relative;
+  }
+  .card:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 24px -14px rgba(11,37,69,.25);
+    border-color:#B9C8D9;
+  }
+  .card .tag{
+    font-family:'IBM Plex Mono','Noto Sans TC', monospace;
+    font-size:10.5px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--crimson);
+    margin-bottom:10px;
+    display:block;
+  }
+  .card h3{
+    font-family:'Space Grotesk','Noto Sans TC', sans-serif;
+    font-size:16.5px;
+    font-weight:600;
+    margin-bottom:6px;
+    color:var(--navy);
+  }
+  .card p{font-size:13.5px; color:var(--ink-soft); line-height:1.55;}
+
+  /* ---------- Info strip ---------- */
+  .info-strip{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:10px;
+    overflow:hidden;
+    margin-bottom:10px;
+  }
+  .info-cell{background:var(--panel); padding:18px 20px;}
+  .info-cell .label{
+    font-family:'IBM Plex Mono','Noto Sans TC', monospace;
+    font-size:10.5px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:#8AA0B8;
+    margin-bottom:6px;
+  }
+  .info-cell .value{
+    font-family:'Space Grotesk','Noto Sans TC', sans-serif;
+    font-size:17px;
+    font-weight:600;
+    color:var(--navy);
+  }
+
+  footer{
+    border-top:1px solid var(--line);
+    margin-top:20px;
+    padding:24px 32px 40px;
+    max-width:1180px;
+    margin-left:auto;
+    margin-right:auto;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+    font-family:'IBM Plex Mono','Noto Sans TC', monospace;
+    font-size:11.5px;
+    color:#8AA0B8;
+  }
+
+  :focus-visible{outline:2px solid var(--crimson); outline-offset:2px;}
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <span class="path">SharePoint / 臨床教育 / ACLS / 20260725</span>
+    <span class="status"><span class="status-dot"></span>網站上線中</span>
+  </div>
+
+  <header class="site">
+    <div class="header-inner">
+      <div>
+        <span class="eyebrow">臨床教育入口網站</span>
+        <h1 class="site-title">ACLS 教學教材<br><span class="accent">SharePoint</span></h1>
+        <p class="site-sub">本站為本梯次進階心臟救命術（ACLS）課程之簡報、急救流程與站別教材的統一入口。</p>
+      </div>
+      <div class="rev-date">
+        <span>梯次代碼</span>
+        <b>20260725</b>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="lead">
+      <div>
+        <h2>歡迎</h2>
+        <p>本頁收錄 20260725 梯次 ACLS 課程的主要教學簡報，並提供相關參考教材的快速連結。下方簡報為即時同步的主要版本——來源簡報若有更新，本頁將自動顯示最新內容。</p>
+      </div>
+      <div class="lead-meta">
+        <span class="k">課程代碼</span><span class="v">ACLS-20260725</span>
+        <span class="k">狀態</span><span class="v">進行中</span>
+        <span class="k">負責單位</span><span class="v">急救復甦委員會</span>
+        <span class="k">教材形式</span><span class="v">簡報檔</span>
+      </div>
+    </div>
+
+    <div class="monitor-wrap">
+      <div class="monitor-bezel">
+        <div class="monitor-lights"><span></span><span></span><span></span></div>
+        <div class="monitor-label">教學簡報 &mdash; 即時畫面</div>
+        <div class="monitor-label">SR &nbsp;72</div>
+      </div>
+      <div class="ecg-strip">
+        <svg viewBox="0 0 1000 46" preserveAspectRatio="none">
+          <g class="trace">
+            <path d="M0,23 L60,23 L72,23 L80,8 L88,38 L96,23 L108,23 L500,23 L560,23 L572,23 L580,8 L588,38 L596,23 L608,23 L1000,23
+                     L1060,23 L1072,23 L1080,8 L1088,38 L1096,23 L1108,23 L1500,23 L1560,23 L1572,23 L1580,8 L1588,38 L1596,23 L1608,23 L2000,23"/>
+          </g>
+        </svg>
+      </div>
+      <div class="embed-frame">
+        <div class="aspect">
+          <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTKR8xR4hPtmoCh7-dYx42B6hUj7x8YLDA5mXHEZHk0YZBa-n2xOSxplrSixgUyWnn7139eSVtV6B5E/pubembed?start=true&amp;loop=true&amp;delayms=10000" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" title="ACLS 教學教材簡報"></iframe>
+        </div>
+      </div>
+      <div class="monitor-footer">
+        <span>來源：GOOGLE 簡報</span>
+        <span>自動換頁 10 秒</span>
+      </div>
+    </div>
+
+    <div class="section-title">快速連結</div>
+    <div class="grid">
+      <div class="card">
+        <span class="tag">急救流程</span>
+        <h3>心跳停止急救流程</h3>
+        <p>可電擊與不可電擊心律之處置路徑、給藥時機與 CPR 品質查核要點。</p>
+      </div>
+      <div class="card">
+        <span class="tag">參考資料</span>
+        <h3>藥物劑量卡</h3>
+        <p>Epinephrine、Amiodarone、Lidocaine 之劑量、給藥途徑與間隔時間說明。</p>
+      </div>
+      <div class="card">
+        <span class="tag">技能站</span>
+        <h3>技能站評核表</h3>
+        <p>呼吸道處置、電擊去顫與 IV / IO 建立管路之能力查核項目。</p>
+      </div>
+      <div class="card">
+        <span class="tag">測驗</span>
+        <h3>課後測驗</h3>
+        <p>涵蓋心律判讀與團隊合作情境之知識測驗。</p>
+      </div>
+      <div class="card">
+        <span class="tag">參考資料</span>
+        <h3>心律判讀練習庫</h3>
+        <p>可電擊與不可電擊心律辨識之練習圖。</p>
+      </div>
+      <div class="card">
+        <span class="tag">課程行政</span>
+        <h3>課程時間表</h3>
+        <p>本梯次各堂課時段、授課講師與教室安排。</p>
+      </div>
+    </div>
+
+    <div class="section-title">課程一覽</div>
+    <div class="info-strip">
+      <div class="info-cell"><div class="label">梯次</div><div class="value">20260725</div></div>
+      <div class="info-cell"><div class="label">教材形式</div><div class="value">簡報檔</div></div>
+      <div class="info-cell"><div class="label">呈現方式</div><div class="value">內嵌顯示</div></div>
+      <div class="info-cell"><div class="label">存取權限</div><div class="value">團隊網站</div></div>
+    </div>
+  </main>
+
+  <footer>
+    <span>&copy; 2026 急救復甦委員會 &mdash; 僅供內部教學使用</span>
+    <span>已自動與來源簡報同步</span>
+  </footer>
+
+</body>
+</html>
