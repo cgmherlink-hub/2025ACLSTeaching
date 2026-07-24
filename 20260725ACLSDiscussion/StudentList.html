@@ -1,1 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACLS 醫師名冊與科別統計摘要</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Microsoft JhengHei", sans-serif;
+            background-color: #f4f6f9;
+            color: #333333;
+            margin: 0;
+            padding: 20px;
+        }
 
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            overflow-x: auto;
+        }
+
+        h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #1a365d;
+            font-size: 20px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .badge {
+            background-color: #ebf8ff;
+            color: #2b6cb0;
+            font-size: 14px;
+            font-weight: normal;
+            padding: 4px 10px;
+            border-radius: 12px;
+            border: 1px solid #bee3f8;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #2b6cb0;
+            color: #ffffff;
+            font-weight: 600;
+            padding: 10px 14px;
+            text-align: center;
+        }
+
+        td {
+            padding: 8px 14px;
+            border-bottom: 1px solid #e2e8f0;
+            text-align: center;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+
+        tr:hover {
+            background-color: #edf2f7;
+        }
+
+        .total-row {
+            font-weight: bold;
+            background-color: #e2e8f0 !important;
+            color: #2d3748;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .grid-layout {
+                grid-template-columns: 3fr 2fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="grid-layout">
+        <!-- Sheet 1: 醫師名冊 -->
+        <div class="card">
+            <h2>
+                <span>醫療人員科別配置表</span>
+                <span class="badge">共 58 人</span>
+            </h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 20%;">序號</th>
+                        <th style="width: 40%;">醫師姓名</th>
+                        <th style="width: 40%;">隸屬科別 / 科系</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>林俊彥</td><td>胃腸肝膽科系</td></tr>
+                    <tr><td>2</td><td>張博瑞</td><td>呼吸道疾病科</td></tr>
+                    <tr><td>3</td><td>洪魏訓</td><td>肺感染及免疫科</td></tr>
+                    <tr><td>4</td><td>董旅安</td><td>復健科</td></tr>
+                    <tr><td>5</td><td>耿祥庭</td><td>胃腸肝膽科系</td></tr>
+                    <tr><td>6</td><td>陳泓宇</td><td>一般科</td></tr>
+                    <tr><td>7</td><td>劉昇</td><td>一般科</td></tr>
+                    <tr><td>8</td><td>許嘉睿</td><td>內分泌暨新陳代謝科</td></tr>
+                    <tr><td>9</td><td>羅艾琳</td><td>婦產部</td></tr>
+                    <tr><td>10</td><td>李昀嬨</td><td>一般科</td></tr>
+                    <tr><td>11</td><td>何思凱</td><td>一般及老年精神科</td></tr>
+                    <tr><td>12</td><td>詹鎮遠</td><td>麻醉部</td></tr>
+                    <tr><td>13</td><td>廖郁芳</td><td>顱顏矯正牙科</td></tr>
+                    <tr><td>14</td><td>胡育瑄</td><td>兒童牙科</td></tr>
+                    <tr><td>15</td><td>沈欣儀</td><td>中醫婦科</td></tr>
+                    <tr><td>16</td><td>王弘丞</td><td>泌尿科系</td></tr>
+                    <tr><td>17</td><td>林宜萱</td><td>婦產部</td></tr>
+                    <tr><td>18</td><td>陳紹緯</td><td>心臟外科</td></tr>
+                    <tr><td>19</td><td>李適鴻</td><td>肺腫瘤及內視鏡科</td></tr>
+                    <tr><td>20</td><td>施博夫</td><td>麻醉科</td></tr>
+                    <tr><td>21</td><td>王立名</td><td>直腸肛門科</td></tr>
+                    <tr><td>22</td><td>林迺喻</td><td>直腸肛門科</td></tr>
+                    <tr><td>23</td><td>楊元瀚</td><td>中醫針傷科</td></tr>
+                    <tr><td>24</td><td>吳聲旻</td><td>風濕過敏免疫科</td></tr>
+                    <tr><td>25</td><td>施昱嘉</td><td>一般科</td></tr>
+                    <tr><td>26</td><td>黃美涓</td><td>復健科</td></tr>
+                    <tr><td>27</td><td>謝育佳</td><td>顱顏矯正牙科</td></tr>
+                    <tr><td>28</td><td>黃怡婷</td><td>婦女內視鏡科</td></tr>
+                    <tr><td>29</td><td>吳明穎</td><td>一般皮膚科</td></tr>
+                    <tr><td>30</td><td>黃昭瑄</td><td>顱顏矯正牙科</td></tr>
+                    <tr><td>31</td><td>陳柔臻</td><td>一般科</td></tr>
+                    <tr><td>32</td><td>洪薾</td><td>一般科</td></tr>
+                    <tr><td>33</td><td>陳冠宇</td><td>兒童牙科</td></tr>
+                    <tr><td>34</td><td>范萬旬</td><td>一般科</td></tr>
+                    <tr><td>35</td><td>張庭豪</td><td>內科部</td></tr>
+                    <tr><td>36</td><td>林承緯</td><td>一般科</td></tr>
+                    <tr><td>37</td><td>陳若瑜</td><td>一般牙科</td></tr>
+                    <tr><td>38</td><td>林劭昀</td><td>中醫部</td></tr>
+                    <tr><td>39</td><td>鄭為仁</td><td>中醫婦科</td></tr>
+                    <tr><td>40</td><td>陳采淩</td><td>一般科</td></tr>
+                    <tr><td>41</td><td>陳冠宏</td><td>腦神經外科</td></tr>
+                    <tr><td>42</td><td>潘宥廷</td><td>一般科</td></tr>
+                    <tr><td>43</td><td>葉芷淇</td><td>一般科</td></tr>
+                    <tr><td>44</td><td>李承臻</td><td>一般科</td></tr>
+                    <tr><td>45</td><td>許月閔</td><td>一般牙科</td></tr>
+                    <tr><td>46</td><td>洪鈺婷</td><td>一般麻醉科</td></tr>
+                    <tr><td>47</td><td>黃強彙</td><td>復健科</td></tr>
+                    <tr><td>48</td><td>廖育舒</td><td>一般牙科</td></tr>
+                    <tr><td>49</td><td>高小雯</td><td>血液科</td></tr>
+                    <tr><td>50</td><td>羅福松</td><td>兒童內分泌暨遺傳科</td></tr>
+                    <tr><td>51</td><td>王才郁</td><td>呼吸道疾病科</td></tr>
+                    <tr><td>52</td><td>陸千琦</td><td>婦產部</td></tr>
+                    <tr><td>53</td><td>陳政瑜</td><td>胸腔及心臟血管外科系</td></tr>
+                    <tr><td>54</td><td>楊振杰</td><td>醫教委員會</td></tr>
+                    <tr><td>55</td><td>吳泰錡</td><td>胃腸肝膽科系</td></tr>
+                    <tr><td>56</td><td>黃逸凱</td><td>兒童牙科</td></tr>
+                    <tr><td>57</td><td>吳婉君</td><td>中醫科部</td></tr>
+                    <tr><td>58</td><td>陳柏旭</td><td>復健科</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Sheet 2: 科別統計摘要 -->
+        <div class="card">
+            <h2>
+                <span>各科別醫師人數統計</span>
+                <span class="badge">共 31 科別</span>
+            </h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">排名</th>
+                        <th style="width: 50%;">科別名稱</th>
+                        <th style="width: 25%;">醫師人數</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>一般科</td><td>12</td></tr>
+                    <tr><td>2</td><td>復健科</td><td>4</td></tr>
+                    <tr><td>3</td><td>胃腸肝膽科系</td><td>3</td></tr>
+                    <tr><td>4</td><td>婦產部</td><td>3</td></tr>
+                    <tr><td>5</td><td>顱顏矯正牙科</td><td>3</td></tr>
+                    <tr><td>6</td><td>兒童牙科</td><td>3</td></tr>
+                    <tr><td>7</td><td>一般牙科</td><td>3</td></tr>
+                    <tr><td>8</td><td>呼吸道疾病科</td><td>2</td></tr>
+                    <tr><td>9</td><td>中醫婦科</td><td>2</td></tr>
+                    <tr><td>10</td><td>直腸肛門科</td><td>2</td></tr>
+                    <tr><td>11</td><td>肺感染及免疫科</td><td>1</td></tr>
+                    <tr><td>12</td><td>內分泌暨新陳代謝科</td><td>1</td></tr>
+                    <tr><td>13</td><td>一般及老年精神科</td><td>1</td></tr>
+                    <tr><td>14</td><td>麻醉部</td><td>1</td></tr>
+                    <tr><td>15</td><td>泌尿科系</td><td>1</td></tr>
+                    <tr><td>16</td><td>心臟外科</td><td>1</td></tr>
+                    <tr><td>17</td><td>肺腫瘤及內視鏡科</td><td>1</td></tr>
+                    <tr><td>18</td><td>麻醉科</td><td>1</td></tr>
+                    <tr><td>19</td><td>中醫針傷科</td><td>1</td></tr>
+                    <tr><td>20</td><td>風濕過敏免疫科</td><td>1</td></tr>
+                    <tr><td>21</td><td>婦女內視鏡科</td><td>1</td></tr>
+                    <tr><td>22</td><td>一般皮膚科</td><td>1</td></tr>
+                    <tr><td>23</td><td>內科部</td><td>1</td></tr>
+                    <tr><td>24</td><td>中醫部</td><td>1</td></tr>
+                    <tr><td>25</td><td>腦神經外科</td><td>1</td></tr>
+                    <tr><td>26</td><td>一般麻醉科</td><td>1</td></tr>
+                    <tr><td>27</td><td>血液科</td><td>1</td></tr>
+                    <tr><td>28</td><td>兒童內分泌暨遺傳科</td><td>1</td></tr>
+                    <tr><td>29</td><td>胸腔及心臟血管外科系</td><td>1</td></tr>
+                    <tr><td>30</td><td>醫教委員會</td><td>1</td></tr>
+                    <tr><td>31</td><td>中醫科部</td><td>1</td></tr>
+                    <tr class="total-row">
+                        <td colspan="2">總計</td>
+                        <td>58</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
