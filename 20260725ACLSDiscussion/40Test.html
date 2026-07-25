@@ -144,9 +144,10 @@
   <button class="nav-btn next-btn" id="nextBtn">&#8250;</button>
 </div>
 <script>
-  // 使用相對網址：此 HTML 檔案需與投影片圖片放在同一個資料夾（40Test）內
+  // 使用相對網址：此 HTML 檔案需與投影片圖片放在同一個資料夾（30Test）內
   const total = 49;
-  const files = Array.from({length: total}, (_, i) => `投影片${i + 1}.jpeg`);
+  const basePath = '40Test/';
+  const files = Array.from({length: total}, (_, i) => `${basePath}投影片${i + 1}.jpeg`);
   const gallery = document.getElementById('gallery');
   const status = document.getElementById('status');
   let loadedCount = 0;
