@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>臨床呼吸道處置與 RSI 評估儀表板</title>
+    <style>
+        :root {
+            --bg-color: #141b25;
+            --card-bg: #1e2633;
+            --text-color: #e2e8f0;
+            --accent-blue: #38bdf8;
+            --accent-orange: #fb923c;
+            --accent-green: #34d399;
+            --accent-red: #f87171;
+            --border-color: #2e3b4e;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+
+        h2 {
+            color: var(--accent-blue);
+            border-left: 4px solid var(--accent-blue);
+            padding-left: 10px;
+            margin-top: 40px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .card-title {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .scenario-title { color: #94a3b8; }
+        .conflict-title { color: var(--accent-orange); }
+        .question-title { color: #a78bfa; }
+        .answer-title { color: var(--accent-green); }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .badge-success { background-color: rgba(52, 211, 153, 0.2); color: var(--accent-green); border: 1px solid var(--accent-green); }
+        .badge-danger { background-color: rgba(248, 113, 113, 0.2); color: var(--accent-red); border: 1px solid var(--accent-red); }
+
+        .alert-banner {
+            background-color: rgba(251, 146, 60, 0.15);
+            border: 1px solid var(--accent-orange);
+            color: var(--accent-orange);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: rgba(56, 189, 248, 0.1);
+            color: var(--accent-blue);
+        }
+
+        .iceberg-container {
+            background: linear-gradient(180deg, #1e2633 0%, #0f172a 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .iceberg-level {
+            padding: 15px;
+            margin: 5px 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .level-tip { background-color: rgba(56, 189, 248, 0.2); border: 1px solid var(--accent-blue); }
+        .level-sub1 { background-color: rgba(56, 189, 248, 0.15); }
+        .level-sub2 { background-color: rgba(56, 189, 248, 0.1); }
+        .level-sub3 { background-color: rgba(56, 189, 248, 0.05); }
+
+        .warning-panel {
+            border: 1px solid var(--accent-red);
+            background-color: rgba(248, 113, 113, 0.05);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>臨床呼吸道處置與 RSI 評估儀表板</h1>
+
+    <!-- 1. 氣道阻塞與基本處置 -->
+    <h2>單元一：呼吸道阻塞與基礎徒手處置</h2>
+    <div class="grid">
+        <div class="card">
+            <div class="card-title scenario-title">📋 情境 (Scenario)</div>
+            <p>60歲男性，GCS E2V4M5，呼吸 24次/分，SpO₂ 90%，伴隨明顯『鼾音』(Snoring)。</p>
+        </div>
+        <div class="card">
+            <div class="card-title conflict-title">⚡ 衝突 - 直覺 (Conflict)</div>
+            <p>病人缺氧！立刻給予高濃度氧氣，並把頭放平保護頸椎。</p>
+        </div>
+        <div class="card">
+            <div class="card-title question-title">🔍 提問 - 反本能追問 (Question)</div>
+            <p>如果氣道已經被堵死，再高的氧氣濃度進得去嗎？平躺真的安全嗎？</p>
+        </div>
+        <div class="card">
+            <div class="card-title answer-title">💡 解答 - 引導建構 (Answer)</div>
+            <p><strong>氧氣無法穿透物理阻塞。</strong>徒手暢通呼吸道永遠是第一步。</p>
+        </div>
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <h3>A. 壓額抬顎法 (Head-Tilt/Chin-Lift)</h3>
+            <p><strong>適用時機：</strong>非外傷適用 (Non-trauma)</p>
+            <p>經由後仰頭部與抬高下巴，解除舌根後墜引起的氣道阻塞。</p>
+        </div>
+        <div class="card">
+            <h3>B. 下顎推擠法 (Jaw-Thrust)</h3>
+            <p><strong>適用時機：</strong>疑似頸椎外傷適用 (Suspected C-spine Trauma)</p>
+            <p>不移動頸椎前提下，以雙手推動下顎角使氣道暢通。</p>
+        </div>
+    </div>
+
+    <!-- 2. 呼吸道輔助器選擇 -->
+    <h2>單元二：呼吸道輔助設備選擇 (Device Selection Radar)</h2>
+    <div class="alert-banner">
+        ⚠️ 雜音來自液體？先 Suction！（經口：嘴角到耳垂；經鼻：鼻尖到耳垂）。
+    </div>
+
+    <div class="grid">
+        <!-- OPA -->
+        <div class="card">
+            <h3 style="color: var(--accent-green);">口咽呼吸道 (OPA)</h3>
+            <div class="badge badge-success">✓ 適應症</div>
+            <p>無意識、無嘔吐反射 (No Gag Reflex)。</p>
+            <p><strong>長度測量：</strong>嘴角至下顎骨角。</p>
+            
+            <div class="badge badge-danger">✗ 致命錯誤</div>
+            <p>有嘔吐反射者置入，將誘發嘔吐與致命性吸入性肺炎。</p>
+        </div>
+
+        <!-- NPA -->
+        <div class="card">
+            <h3 style="color: var(--accent-blue);">鼻咽呼吸道 (NPA)</h3>
+            <div class="badge badge-success">✓ 適應症</div>
+            <p>半昏迷、仍有嘔吐/咳嗽反射。溫和的替代方案。</p>
+            <p><strong>長度測量：</strong>鼻尖至耳垂。</p>
+            
+            <div class="badge badge-danger">✗ 致命錯誤</div>
+            <p>顱底骨折或嚴重顏面骨折<strong>絕對禁用</strong>（可能誤入顱腔）。</p>
+        </div>
+    </div>
+    
+    <div class="card" style="border-left: 4px solid #a78bfa;">
+        <strong>🔍 反思提問：</strong>你以為 NPA 比較溫和就隨時可用？在顱底骨折時，它可能是致命武器。
+    </div>
+
+    <!-- 3. 給氧與特殊情境 -->
+    <h2>單元三：氧氣流量與特殊中毒情境</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>氧氣設備流量對照 (Oxygen Flow Dial)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>設備名稱</th>
+                        <th>建議流量 (Flow)</th>
+                        <th>氧氣濃度 (FiO₂)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>鼻導管 (Nasal Cannula)</td>
+                        <td>1-6 L/min</td>
+                        <td>24 - 44%</td>
+                    </tr>
+                    <tr>
+                        <td>非重呼吸面罩 (NRM)</td>
+                        <td>10-15 L/min</td>
+                        <td>60 - 90%</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><small>*註：使用 NRM 時氧氣儲氣袋不可塌陷，面罩必須與臉部密合。</small></p>
+        </div>
+        
+        <div class="card">
+            <h3 style="color: var(--accent-red);">火場個案：高致命性的假性安全感</h3>
+            <p><strong>情境：</strong>26歲火場救出的男性，無燒傷，意識清楚，SpO₂ 高達 94%。</p>
+            <p><strong>盲點直覺：</strong>血氧 94%！氧氣充足，不用急著給高濃度氧氣？</p>
+            <p><strong>臨床真相：</strong>SpO₂ 機器分不清『一氧化碳』與『氧氣』！CO 結合力為氧氣的 200 倍。火場病患無論數值為何，<strong>必須立刻給予 NRM 15 L/min 高濃度氧氣</strong>，以強制置換 COHb。</p>
+        </div>
+    </div>
+
+    <!-- 4. RSI 快速氣管內管引導插管 -->
+    <h2>單元四：快速氣管內管引導插管 (RSI) 核心觀念</h2>
+    <div class="iceberg-container">
+        <h3 style="text-align: center; color: #fff;">RSI "Iceberg" Diagram</h3>
+        <div class="iceberg-level level-tip">
+            <strong>冰山一角 10% (Above Water - The Illusion)</strong><br>
+            麻痺 (Paralysis) & 插管 (Pass the tube)
+        </div>
+        <div class="iceberg-level level-sub1">
+            <strong>先給氧 (Pre-oxygenation)</strong>：建立安全儲備 (90~100% O₂)
+        </div>
+        <div class="iceberg-level level-sub2">
+            <strong>給藥與擺位 (Pre-medication & Positioning)</strong>：嗅吸姿勢 (Sniffing position)
+        </div>
+        <div class="iceberg-level level-sub3">
+            <strong>準備工作 90% (Preparation - 救命關鍵)</strong>：O₂ / IV / Monitor / Endo / Suction / 替代方案 (SGA/外科)
+        </div>
+    </div>
+    <div class="card">
+        <strong>💡 核心解答：</strong>為什麼真正導致插管致死的，通常不是『插不進去』，而是<strong>『沒準備好』</strong>？充足的預給氧與準備能提供寶貴的呼吸暫停耐受時間（Apnea time）。
+    </div>
+
+    <!-- 5. 藥物決策樹 -->
+    <h2>單元五：RSI 藥物選擇決策樹 (Medications Decision Tree)</h2>
+    <h3>1. 鎮靜藥物 (Sedatives)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>病患條件 (Patient Condition)</th>
+                <th>首選藥物</th>
+                <th>臨床注意事項</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>A. 非外傷病患 (Non-trauma)</td>
+                <td><strong>Midazolam</strong></td>
+                <td>需特別注意血壓下降</td>
+            </tr>
+            <tr>
+                <td>B. 外傷 / 顱內壓高 (Trauma / IICP)</td>
+                <td><strong>Fentanyl</strong></td>
+                <td>降低顱內壓，且較不影響血壓</td>
+            </tr>
+            <tr>
+                <td>C. 氣喘 / COPD / 低血壓</td>
+                <td><strong>Ketamine</strong></td>
+                <td>可解除支氣管痙攣</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="warning-panel">
+        <h3 style="color: var(--accent-red); margin-top: 0;">2. 肌肉鬆弛劑 (NMBA) 警告面板</h3>
+        <div class="grid">
+            <div>
+                <h4 style="color: var(--accent-green);">非去極化型 (Safe, longer onset)</h4>
+                <ul>
+                    <li><strong>Rocurnium / Cisatracurium</strong></li>
+                    <li>特點：安全性高、作用時間較長。</li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color: var(--accent-orange);">去極化型：Succinylcholine</h4>
+                <p>特點：極速但於特定狀況下具致命風險（會引起肌肉顫動）。</p>
+                <strong style="color: var(--accent-red);">⚠️ 絕對禁忌症：</strong>
+                <p>高血鉀 (High K⁺)、頭部外傷/IICP、腎衰竭 (Renal Failure)、大面積燒傷/橫紋肌溶解、惡性高熱、青光眼 (Glaucoma)。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6. LEMON 困難插管風險評估 -->
+    <h2>單元六：困難插管風險評估 (Clinical Detective Dashboard)</h2>
+    <div class="card">
+        <h3 style="text-align: center; color: var(--accent-blue);">LEMON 評估法</h3>
+        <ul>
+            <li><strong>L - Look externally (外觀)：</strong> 常被遺漏的致命危險因子：<strong>短頸 (Short neck)、小下巴 (Small mandible)</strong>、肥胖。這類病患喉頭鏡挑管時不易看到喉頭。</li>
+            <li><strong>E - Evaluate 3-3-2 (空間評估)：</strong>
+                <ul>
+                    <li>3指：張口度。</li>
+                    <li>3指：下顎至舌骨。</li>
+                    <li>2指：甲狀軟骨切跡至口底。</li>
+                </ul>
+            </li>
+            <li><strong>M - Mallampati classification (視野)：</strong> 評估軟顎、懸雍垂的可見度（Visible vs Hidden）。</li>
+            <li><strong>O - Obstruction (阻塞)：</strong> 腫塊、血腫、感染等物理阻礙。</li>
+            <li><strong>N - Neck mobility (頸部活動度)：</strong> 關節炎或需頸椎固定（C-spine stabilization），限制插管角度。</li>
+        </ul>
+    </div>
+
+    <!-- 7. 救援通則與替代方案 -->
+    <h2>單元七：救援通則與後撤步驟 (Rescue Protocol: Fallback Steps)</h2>
+    <div class="grid">
+        <div class="card">
+            <h3 style="color: var(--accent-green);">救命神器：LMA (喉罩氣道)</h3>
+            <p>當臉部面罩 (BVM) 密合度不佳，且傳統插管 (ETT) 困難時優先考慮。心臟停止 (C.A.) 更是首選。</p>
+            <ul>
+                <li>置入過程不需移動頸椎</li>
+                <li>學習門檻低</li>
+                <li>減少胃部過度充氣</li>
+            </ul>
+        </div>
+        
+        <div class="card" style="border: 1px solid var(--accent-red);">
+            <h3 style="color: var(--accent-red);">Cannot Intubate, Cannot Oxygenate (CICO)</h3>
+            <p><strong>緊急外科呼吸道 (Surgical Airway - 環甲膜切開術)</strong></p>
+            <p>當血氧持續掉落、心跳過緩即將停止時，<strong>不要執著於經口插管，果斷切開。</strong></p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
