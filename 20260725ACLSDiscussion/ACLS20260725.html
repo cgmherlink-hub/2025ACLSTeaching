@@ -20,6 +20,7 @@
     --text:#e9edf5;
     --text-dim:#8492ab;
     --text-faint:#4c586e;
+    --danger:#ff6b6b;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
@@ -52,7 +53,7 @@
   .dot{width:8px; height:8px; border-radius:50%; background:var(--ecg); box-shadow:0 0 8px var(--ecg);
     animation:pulse 1.6s ease-in-out infinite;}
   @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:.35;}}
-  .topbar .topbar-right{display:flex; align-items:center; gap:22px;}
+  .topbar .topbar-right{display:flex; align-items:center; gap:22px; flex-wrap:wrap;}
   .topbar .status{font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--amber); letter-spacing:.08em;}
   .topbar .nav-link{
     font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.08em;
@@ -62,6 +63,8 @@
   }
   .topbar .nav-link:hover{background:var(--ecg-dim);}
   .topbar .nav-link:focus-visible{outline:2px solid var(--ecg); outline-offset:2px;}
+  .topbar .nav-link.amber{color:var(--amber); border-color:var(--amber-dim);}
+  .topbar .nav-link.amber:hover{background:var(--amber-dim);}
   /* ---- hero ---- */
   .hero{padding:76px 0 40px; text-align:center;}
   .eyebrow{
@@ -205,6 +208,62 @@
     border-top:1px solid var(--panel-line); padding:26px 0; text-align:center;
     font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--text-faint); letter-spacing:.05em;
   }
+
+  /* ---- ACLS Gate: 密碼保護資料區 ---- */
+  #data-gate .sec-head{margin-bottom:32px;}
+  .gate-panel{
+    background:var(--panel); border:1px solid var(--panel-line);
+    padding:48px 40px;
+  }
+  #gateLoginScreen{
+    max-width:380px; margin:0 auto; text-align:center;
+  }
+  #gateLoginScreen .lock-icon{font-size:30px; margin-bottom:14px;}
+  #gateLoginScreen p{color:var(--text-dim); font-size:14px; margin-bottom:26px;}
+  #gatePasswordInput{
+    width:100%; padding:13px 14px; background:var(--bg-alt);
+    border:1px solid var(--panel-line); border-radius:2px;
+    color:var(--text); font-family:'IBM Plex Mono', monospace; font-size:14px;
+    margin-bottom:14px; outline:none; letter-spacing:.03em;
+  }
+  #gatePasswordInput::placeholder{color:var(--text-faint);}
+  #gatePasswordInput:focus{border-color:var(--ecg); box-shadow:0 0 0 3px var(--ecg-dim);}
+  #gateLoginBtn{
+    width:100%; padding:13px 14px; background:var(--ecg); color:#06120c;
+    border:none; border-radius:2px; font-weight:700; font-size:14px;
+    font-family:'IBM Plex Mono', monospace; letter-spacing:.05em; cursor:pointer;
+    transition:opacity .15s ease;
+  }
+  #gateLoginBtn:hover{opacity:.85;}
+  #gateErrorMsg{
+    color:var(--danger); font-size:13px; margin-top:12px; min-height:1.2em;
+    font-family:'IBM Plex Mono', monospace;
+  }
+  #gateContentScreen{display:none;}
+  .gate-cards{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+    background:var(--panel-line); border:1px solid var(--panel-line);
+  }
+  .gate-card-link{text-decoration:none; color:inherit;}
+  .gate-card{
+    background:var(--bg-alt); padding:34px 20px; text-align:center;
+    transition:background .15s ease;
+  }
+  .gate-card:hover{background:var(--panel);}
+  .gate-card .icon{font-size:26px; margin-bottom:12px;}
+  .gate-card .title{
+    font-family:'IBM Plex Mono', monospace; font-size:16px; font-weight:600;
+    color:var(--ecg); margin-bottom:6px;
+  }
+  .gate-card .desc{font-size:13px; color:var(--text-dim);}
+  @media (max-width:720px){.gate-cards{grid-template-columns:1fr;}}
+  #gateLogoutBtn{
+    display:block; margin:26px auto 0; background:none;
+    border:1px solid var(--panel-line); color:var(--text-faint);
+    padding:8px 18px; border-radius:2px; cursor:pointer;
+    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.05em;
+  }
+  #gateLogoutBtn:hover{color:var(--danger); border-color:var(--danger);}
 </style>
 </head>
 <body>
@@ -215,6 +274,7 @@
       <a class="nav-link" href="0725ACLSSchedule.html">課程表</a>
       <a class="nav-link" href="Airway.html">Airway</a>
       <a class="nav-link" href="Bradycardia.html">Bradycardia</a>
+      <a class="nav-link amber" href="#data-gate">🔒 組別資料</a>
     </div>
   </div>
   <div class="hero wrap">
@@ -343,8 +403,104 @@
       </div>
     </div>
   </section>
+
+  <!-- ================= ACLS Gate: 密碼保護組別資料 ================= -->
+  <section class="wrap" id="data-gate">
+    <div class="sec-head">
+      <div class="tag">Restricted Access · 組別資料</div>
+      <h2>2026 ACLS Discussion 資料入口</h2>
+    </div>
+    <div class="gate-panel">
+
+      <!-- 密碼輸入畫面 -->
+      <div id="gateLoginScreen">
+        <div class="lock-icon">🔒</div>
+        <p>請輸入密碼以檢視 30 / 40 / 50 Test 組別資料</p>
+        <input type="password" id="gatePasswordInput" placeholder="請輸入密碼" autocomplete="off">
+        <button id="gateLoginBtn">進入</button>
+        <div id="gateErrorMsg"></div>
+      </div>
+
+      <!-- 卡片內容畫面 -->
+      <div id="gateContentScreen">
+        <div class="gate-cards">
+          <a class="gate-card-link" href="30Test.html">
+            <div class="gate-card">
+              <div class="icon">📁</div>
+              <div class="title">30 Test</div>
+              <div class="desc">查看 30Test 組別資料</div>
+            </div>
+          </a>
+          <a class="gate-card-link" href="40Test.html">
+            <div class="gate-card">
+              <div class="icon">📁</div>
+              <div class="title">40 Test</div>
+              <div class="desc">查看 40Test 組別資料</div>
+            </div>
+          </a>
+          <a class="gate-card-link" href="50Test.html">
+            <div class="gate-card">
+              <div class="icon">📁</div>
+              <div class="title">50 Test</div>
+              <div class="desc">查看 50Test 組別資料</div>
+            </div>
+          </a>
+        </div>
+        <button id="gateLogoutBtn">登出</button>
+      </div>
+
+    </div>
+  </section>
+
   <footer>
     ACLS 討論會 · 2026.07.25 · 如有異動請以最新公告為準
   </footer>
+
+<script>
+  (function(){
+    const CORRECT_PASSWORD = "jimmy601@hotmail";
+    const SESSION_KEY = "acls_2026_authenticated";
+
+    const loginScreen = document.getElementById('gateLoginScreen');
+    const contentScreen = document.getElementById('gateContentScreen');
+    const passwordInput = document.getElementById('gatePasswordInput');
+    const loginBtn = document.getElementById('gateLoginBtn');
+    const errorMsg = document.getElementById('gateErrorMsg');
+    const logoutBtn = document.getElementById('gateLogoutBtn');
+
+    function showContent() {
+      loginScreen.style.display = 'none';
+      contentScreen.style.display = 'block';
+    }
+
+    function tryLogin() {
+      if (passwordInput.value === CORRECT_PASSWORD) {
+        sessionStorage.setItem(SESSION_KEY, "1");
+        showContent();
+      } else {
+        errorMsg.textContent = '密碼錯誤，請再試一次';
+        passwordInput.value = '';
+        passwordInput.focus();
+      }
+    }
+
+    loginBtn.addEventListener('click', tryLogin);
+    passwordInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') tryLogin();
+    });
+
+    logoutBtn.addEventListener('click', () => {
+      sessionStorage.removeItem(SESSION_KEY);
+      contentScreen.style.display = 'none';
+      loginScreen.style.display = 'block';
+      passwordInput.value = '';
+      errorMsg.textContent = '';
+    });
+
+    if (sessionStorage.getItem(SESSION_KEY) === "1") {
+      showContent();
+    }
+  })();
+</script>
 </body>
 </html>
