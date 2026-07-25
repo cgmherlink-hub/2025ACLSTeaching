@@ -191,7 +191,7 @@
   const BASE = "https://raw.githubusercontent.com/cgmherlink-hub/2025ACLSTeaching/main/20260725ACLSDiscussion/40Test/";
 
   function urlFor(n) {
-    return BASE + encodeURIComponent("投影片" + n + ".jpeg");
+    return BASE + encodeURIComponent("投影片" + n + ".jpg");
   }
 
   const grid = document.getElementById('grid');
@@ -202,7 +202,7 @@
     card.onclick = () => openLightbox(i);
     card.innerHTML = `
       <img src="${urlFor(i)}" alt="投影片${i}" loading="lazy">
-      <div class="label"><span class="num">投影片 ${i}</span><span>jpeg</span></div>
+      <div class="label"><span class="num">投影片 ${i}</span><span>jpg</span></div>
     `;
     grid.appendChild(card);
   }
