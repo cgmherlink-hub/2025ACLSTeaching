@@ -160,12 +160,31 @@
     background:var(--panel); border:1px solid var(--panel-line);
     padding:20px;
   }
+  .live-panel-header{
+    display:flex; align-items:center; justify-content:space-between;
+    margin-bottom:16px;
+  }
   .live-panel .live-tag{
     display:inline-flex; align-items:center; gap:8px;
     font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.1em;
-    color:var(--ecg); text-transform:uppercase; margin-bottom:16px;
+    color:var(--ecg); text-transform:uppercase;
   }
   .live-panel .live-tag .dot{width:7px; height:7px;}
+  /* ---- fullscreen toggle button ---- */
+  .fs-btn{
+    display:inline-flex; align-items:center; gap:6px;
+    background:transparent; border:1px solid var(--panel-line); color:var(--text-dim);
+    font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.05em;
+    padding:7px 13px; border-radius:2px; cursor:pointer;
+    transition:border-color .15s ease, color .15s ease, background .15s ease;
+  }
+  .fs-btn:hover{border-color:var(--ecg); color:var(--ecg); background:var(--ecg-dim);}
+  .fs-btn:focus-visible{outline:2px solid var(--ecg); outline-offset:2px;}
+  .fs-btn svg{width:13px; height:13px; flex-shrink:0;}
+  .fs-btn .fs-icon-expand{display:inline-block;}
+  .fs-btn .fs-icon-collapse{display:none;}
+  .fs-btn.is-fullscreen .fs-icon-expand{display:none;}
+  .fs-btn.is-fullscreen .fs-icon-collapse{display:inline-block;}
   .slide-frame{
     position:relative; width:100%;
     padding-top:58.5%; /* 1280:749 ratio */
@@ -175,6 +194,15 @@
   }
   .slide-frame iframe{
     position:absolute; top:0; left:0; width:100%; height:100%; border:0;
+  }
+  /* full screen state: fill the viewport, drop the aspect-ratio padding trick */
+  .slide-frame:fullscreen,
+  .slide-frame:-webkit-full-screen{
+    padding-top:0; height:100vh; width:100vw;
+  }
+  .slide-frame:fullscreen iframe,
+  .slide-frame:-webkit-full-screen iframe{
+    position:absolute; top:0; left:0; width:100%; height:100%;
   }
   /* ---- info cards ---- */
   .info-grid{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--panel-line); border:1px solid var(--panel-line);}
@@ -301,7 +329,14 @@
       <h2>教學簡報即時畫面 01</h2>
     </div>
     <div class="live-panel">
-      <div class="live-tag"><span class="dot"></span>LIVE</div>
+      <div class="live-panel-header">
+        <div class="live-tag"><span class="dot"></span>LIVE</div>
+        <button type="button" class="fs-btn" onclick="toggleFullscreen(this)" aria-label="切換全螢幕">
+          <svg class="fs-icon-expand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/></svg>
+          <svg class="fs-icon-collapse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v3a2 2 0 0 1-2 2H4M15 3v3a2 2 0 0 0 2 2h3M9 21v-3a2 2 0 0 0-2-2H4M15 21v-3a2 2 0 0 1 2-2h3"/></svg>
+          <span class="fs-label">全螢幕</span>
+        </button>
+      </div>
       <div class="slide-frame">
         <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vS-pI2OXkQMVof33Ta95126XznRguCYNp0aCQmnZmxIzANpt5Lmv66wWB7-siJ5SQ/pubembed?start=true&loop=true&delayms=10000" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
       </div>
@@ -313,7 +348,14 @@
       <h2>教學簡報即時畫面 02-acute stroke</h2>
     </div>
     <div class="live-panel">
-      <div class="live-tag"><span class="dot"></span>LIVE</div>
+      <div class="live-panel-header">
+        <div class="live-tag"><span class="dot"></span>LIVE</div>
+        <button type="button" class="fs-btn" onclick="toggleFullscreen(this)" aria-label="切換全螢幕">
+          <svg class="fs-icon-expand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/></svg>
+          <svg class="fs-icon-collapse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v3a2 2 0 0 1-2 2H4M15 3v3a2 2 0 0 0 2 2h3M9 21v-3a2 2 0 0 0-2-2H4M15 21v-3a2 2 0 0 1 2-2h3"/></svg>
+          <span class="fs-label">全螢幕</span>
+        </button>
+      </div>
       <div class="slide-frame">
         <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vS-pI2OXkQMVof33Ta95126XznRguCYNp0aCQmnZmxIzANpt5Lmv66wWB7-siJ5SQ/pubembed?start=true&loop=true&delayms=10000" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
       </div>
@@ -325,7 +367,14 @@
       <h2>教學簡報即時畫面 03-Respiratory Arrest</h2>
     </div>
     <div class="live-panel">
-      <div class="live-tag"><span class="dot"></span>LIVE</div>
+      <div class="live-panel-header">
+        <div class="live-tag"><span class="dot"></span>LIVE</div>
+        <button type="button" class="fs-btn" onclick="toggleFullscreen(this)" aria-label="切換全螢幕">
+          <svg class="fs-icon-expand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/></svg>
+          <svg class="fs-icon-collapse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v3a2 2 0 0 1-2 2H4M15 3v3a2 2 0 0 0 2 2h3M9 21v-3a2 2 0 0 0-2-2H4M15 21v-3a2 2 0 0 1 2-2h3"/></svg>
+          <span class="fs-label">全螢幕</span>
+        </button>
+      </div>
       <div class="slide-frame">
         <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQjCjpoDn1y8lc_SUKo_6Cj17u3gDNKRXAi2j3F2MjG31CC_BcNz3ybsUPcBPZz4g/pubembed?start=true&loop=true&delayms=10000" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
       </div>
@@ -337,7 +386,14 @@
       <h2>教學簡報即時畫面 04-Bradycardia</h2>
     </div>
     <div class="live-panel">
-      <div class="live-tag"><span class="dot"></span>LIVE</div>
+      <div class="live-panel-header">
+        <div class="live-tag"><span class="dot"></span>LIVE</div>
+        <button type="button" class="fs-btn" onclick="toggleFullscreen(this)" aria-label="切換全螢幕">
+          <svg class="fs-icon-expand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/></svg>
+          <svg class="fs-icon-collapse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v3a2 2 0 0 1-2 2H4M15 3v3a2 2 0 0 0 2 2h3M9 21v-3a2 2 0 0 0-2-2H4M15 21v-3a2 2 0 0 1 2-2h3"/></svg>
+          <span class="fs-label">全螢幕</span>
+        </button>
+      </div>
       <div class="slide-frame">
         <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSwjUNMZwv68sWogUx1EnlXtDGP_9dPhxL-P0T3JBEYB4ViCBym9sGXyFnN0RNmBg/pubembed?start=true&loop=true&delayms=30000" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
       </div>
@@ -349,7 +405,14 @@
       <h2>教學簡報即時畫面 05-pulselessVT/VF</h2>
     </div>
     <div class="live-panel">
-      <div class="live-tag"><span class="dot"></span>LIVE</div>
+      <div class="live-panel-header">
+        <div class="live-tag"><span class="dot"></span>LIVE</div>
+        <button type="button" class="fs-btn" onclick="toggleFullscreen(this)" aria-label="切換全螢幕">
+          <svg class="fs-icon-expand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/></svg>
+          <svg class="fs-icon-collapse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v3a2 2 0 0 1-2 2H4M15 3v3a2 2 0 0 0 2 2h3M9 21v-3a2 2 0 0 0-2-2H4M15 21v-3a2 2 0 0 1 2-2h3"/></svg>
+          <span class="fs-label">全螢幕</span>
+        </button>
+      </div>
       <div class="slide-frame">
         <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQNufk4pObJH3asTTfKnP2QIPZ-V6eYj8uE-L--47ikqjBuVVELOZR47CtkBDGWRw/pubembed?start=true&loop=true&delayms=3000" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
       </div>
@@ -361,7 +424,14 @@
       <h2>教學簡報即時畫面 06 — Tachycardia Guide</h2>
     </div>
     <div class="live-panel">
-      <div class="live-tag"><span class="dot"></span>LIVE</div>
+      <div class="live-panel-header">
+        <div class="live-tag"><span class="dot"></span>LIVE</div>
+        <button type="button" class="fs-btn" onclick="toggleFullscreen(this)" aria-label="切換全螢幕">
+          <svg class="fs-icon-expand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/></svg>
+          <svg class="fs-icon-collapse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v3a2 2 0 0 1-2 2H4M15 3v3a2 2 0 0 0 2 2h3M9 21v-3a2 2 0 0 0-2-2H4M15 21v-3a2 2 0 0 1 2-2h3"/></svg>
+          <span class="fs-label">全螢幕</span>
+        </button>
+      </div>
       <div class="slide-frame">
         <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSk5xFQO73F2JH_rtH9hnrKgz_AWOF6FVIaBOcxze-8bEkyAZzDYv5R4QXsf7pxpQ/pubembed?start=true&loop=true&delayms=30000" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
       </div>
@@ -373,7 +443,14 @@
       <h2>教學簡報即時畫面 07 — Tachycardia Guide 補充</h2>
     </div>
     <div class="live-panel">
-      <div class="live-tag"><span class="dot"></span>LIVE</div>
+      <div class="live-panel-header">
+        <div class="live-tag"><span class="dot"></span>LIVE</div>
+        <button type="button" class="fs-btn" onclick="toggleFullscreen(this)" aria-label="切換全螢幕">
+          <svg class="fs-icon-expand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/></svg>
+          <svg class="fs-icon-collapse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v3a2 2 0 0 1-2 2H4M15 3v3a2 2 0 0 0 2 2h3M9 21v-3a2 2 0 0 0-2-2H4M15 21v-3a2 2 0 0 1 2-2h3"/></svg>
+          <span class="fs-label">全螢幕</span>
+        </button>
+      </div>
       <div class="slide-frame">
         <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRsfeyrrATOAx615YICvarBAbmvFtbTd5X2F5DMQpAETal99N7-WYzANv7xVRu7tw/pubembed?start=true&loop=true&delayms=10000" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
       </div>
@@ -385,7 +462,14 @@
       <h2>教學簡報即時畫面 08 — Special Resuscitation</h2>
     </div>
     <div class="live-panel">
-      <div class="live-tag"><span class="dot"></span>LIVE</div>
+      <div class="live-panel-header">
+        <div class="live-tag"><span class="dot"></span>LIVE</div>
+        <button type="button" class="fs-btn" onclick="toggleFullscreen(this)" aria-label="切換全螢幕">
+          <svg class="fs-icon-expand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/></svg>
+          <svg class="fs-icon-collapse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v3a2 2 0 0 1-2 2H4M15 3v3a2 2 0 0 0 2 2h3M9 21v-3a2 2 0 0 0-2-2H4M15 21v-3a2 2 0 0 1 2-2h3"/></svg>
+          <span class="fs-label">全螢幕</span>
+        </button>
+      </div>
       <div class="slide-frame">
         <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQh8HKUJhe5AVJ2E5XZadi2BHHrjhRWb_SY-xqCfOL5AFw26ci1-r4v0A7scDtOXQ/pubembed?start=true&loop=true&delayms=10000" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
       </div>
@@ -397,7 +481,14 @@
       <h2>教學簡報即時畫面 -PEA</h2>
     </div>
     <div class="live-panel">
-      <div class="live-tag"><span class="dot"></span>LIVE</div>
+      <div class="live-panel-header">
+        <div class="live-tag"><span class="dot"></span>LIVE</div>
+        <button type="button" class="fs-btn" onclick="toggleFullscreen(this)" aria-label="切換全螢幕">
+          <svg class="fs-icon-expand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/></svg>
+          <svg class="fs-icon-collapse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v3a2 2 0 0 1-2 2H4M15 3v3a2 2 0 0 0 2 2h3M9 21v-3a2 2 0 0 0-2-2H4M15 21v-3a2 2 0 0 1 2-2h3"/></svg>
+          <span class="fs-label">全螢幕</span>
+        </button>
+      </div>
       <div class="slide-frame">
         <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTYvcQu-73JkgaoCNQ-BARXir7Wa0fYOOZcvn7pbt7LtCNCXEc9GaU5Y8RUnLTepg/pubembed?start=true&loop=true&delayms=10000" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
       </div>
@@ -457,6 +548,53 @@
   </footer>
 
 <script>
+  // ---- 全螢幕切換 ----
+  function toggleFullscreen(btn) {
+    const panel = btn.closest('.live-panel');
+    const frame = panel.querySelector('.slide-frame');
+
+    const isCurrentlyFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
+
+    if (!isCurrentlyFullscreen) {
+      if (frame.requestFullscreen) {
+        frame.requestFullscreen();
+      } else if (frame.webkitRequestFullscreen) {
+        frame.webkitRequestFullscreen();
+      } else if (frame.msRequestFullscreen) {
+        frame.msRequestFullscreen();
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      }
+    }
+  }
+
+  function updateFsButtons() {
+    const fsElement = document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
+    document.querySelectorAll('.live-panel').forEach(panel => {
+      const frame = panel.querySelector('.slide-frame');
+      const btn = panel.querySelector('.fs-btn');
+      const label = btn.querySelector('.fs-label');
+      if (fsElement === frame) {
+        btn.classList.add('is-fullscreen');
+        label.textContent = '縮小';
+      } else {
+        btn.classList.remove('is-fullscreen');
+        label.textContent = '全螢幕';
+      }
+    });
+  }
+
+  document.addEventListener('fullscreenchange', updateFsButtons);
+  document.addEventListener('webkitfullscreenchange', updateFsButtons);
+  document.addEventListener('msfullscreenchange', updateFsButtons);
+
+  // ---- 密碼保護組別資料 ----
   (function(){
     const CORRECT_PASSWORD = "jimmy601@hotmail";
     const SESSION_KEY = "acls_2026_authenticated";
