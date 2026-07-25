@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Special Circumstances — 特殊情境下的復甦</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #1a1d24;
+    --accent: #4f8ef7;
+    --text: #e8e9ec;
+    --muted: #8b8f99;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, "Segoe UI", "PingFang TC", "Noto Sans TC", Roboto, sans-serif;
+    height: 100%;
+    overflow: hidden;
+  }
+  #app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: var(--panel);
+    border-bottom: 1px solid #2a2e38;
+    flex-shrink: 0;
+  }
+  header h1 {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .counter {
+    font-size: 13px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    margin-left: 16px;
+  }
+  main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 16px;
+  }
+  .slide-wrap {
+    max-width: 100%;
+    max-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .slide-wrap img {
+    max-width: 100%;
+    max-height: calc(100vh - 140px);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+    border-radius: 4px;
+    background: #fff;
+    user-select: none;
+  }
+  .nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(26,29,36,0.75);
+    border: 1px solid #2a2e38;
+    color: var(--text);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+  }
+  .nav-btn:hover { background: var(--accent); }
+  .nav-btn:disabled { opacity: 0.25; cursor: default; background: rgba(26,29,36,0.75); }
+  #prevBtn { left: 16px; }
+  #nextBtn { right: 16px; }
+  footer {
+    flex-shrink: 0;
+    background: var(--panel);
+    border-top: 1px solid #2a2e38;
+    padding: 10px 16px;
+  }
+  .thumbs {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+  .thumbs::-webkit-scrollbar { height: 6px; }
+  .thumbs::-webkit-scrollbar-thumb { background: #333844; border-radius: 3px; }
+  .thumb {
+    flex-shrink: 0;
+    width: 84px;
+    height: 47px;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+    opacity: 0.55;
+    transition: opacity 0.15s, border-color 0.15s;
+    background: #fff;
+  }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .thumb.active { border-color: var(--accent); opacity: 1; }
+  .thumb:hover { opacity: 1; }
+  .progress {
+    height: 3px;
+    background: #2a2e38;
+    position: relative;
+    margin-top: 8px;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: width 0.2s;
+  }
+  .hint {
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+  @media (max-width: 600px) {
+    .nav-btn { width: 36px; height: 36px; font-size: 16px; }
+    header h1 { font-size: 13px; }
+    .thumb { width: 60px; height: 34px; }
+  }
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <h1>特殊情境下的復甦 (Special Circumstances) — 長庚紀念醫院 急診醫學部</h1>
+    <div class="counter"><span id="curNum">1</span> / <span id="totalNum">71</span></div>
+  </header>
+
+  <main>
+    <button class="nav-btn" id="prevBtn" aria-label="Previous slide">&#8249;</button>
+    <div class="slide-wrap">
+      <img id="slideImg" src="images/slide-01.jpg" alt="Slide 1">
+    </div>
+    <button class="nav-btn" id="nextBtn" aria-label="Next slide">&#8250;</button>
+  </main>
+
+  <footer>
+    <div class="progress" id="progressBar">
+      <div class="progress-fill" id="progressFill" style="width: 1.4%;"></div>
+    </div>
+    <div class="thumbs" id="thumbs"></div>
+    <div class="hint">Use ← → arrow keys, click thumbnails, or swipe to navigate</div>
+  </footer>
+</div>
+
+<script>
+  const TOTAL = 71;
+  let current = 1;
+
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+  const slideImg = document.getElementById('slideImg');
+  const curNum = document.getElementById('curNum');
+  const totalNum = document.getElementById('totalNum');
+  const progressFill = document.getElementById('progressFill');
+  const thumbsEl = document.getElementById('thumbs');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
+  totalNum.textContent = TOTAL;
+
+  // Build thumbnails
+  for (let i = 1; i <= TOTAL; i++) {
+    const div = document.createElement('div');
+    div.className = 'thumb';
+    div.dataset.index = i;
+    const img = document.createElement('img');
+    img.loading = 'lazy';
+    img.src = `images/slide-${pad(i)}.jpg`;
+    img.alt = `Slide ${i} thumbnail`;
+    div.appendChild(img);
+    div.addEventListener('click', () => goTo(i));
+    thumbsEl.appendChild(div);
+  }
+
+  function goTo(n) {
+    if (n < 1 || n > TOTAL) return;
+    current = n;
+    slideImg.src = `images/slide-${pad(current)}.jpg`;
+    slideImg.alt = `Slide ${current}`;
+    curNum.textContent = current;
+    progressFill.style.width = (current / TOTAL * 100).toFixed(1) + '%';
+    prevBtn.disabled = current === 1;
+    nextBtn.disabled = current === TOTAL;
+
+    document.querySelectorAll('.thumb').forEach(t => {
+      t.classList.toggle('active', parseInt(t.dataset.index) === current);
+    });
+    const activeThumb = document.querySelector('.thumb.active');
+    if (activeThumb) activeThumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  }
+
+  prevBtn.addEventListener('click', () => goTo(current - 1));
+  nextBtn.addEventListener('click', () => goTo(current + 1));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { goTo(current + 1); e.preventDefault(); }
+    if (e.key === 'ArrowLeft') { goTo(current - 1); e.preventDefault(); }
+  });
+
+  document.getElementById('progressBar').addEventListener('click', (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const ratio = (e.clientX - rect.left) / rect.width;
+    goTo(Math.max(1, Math.min(TOTAL, Math.round(ratio * TOTAL))));
+  });
+
+  // Touch swipe support
+  let touchStartX = null;
+  document.querySelector('main').addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+  document.querySelector('main').addEventListener('touchend', (e) => {
+    if (touchStartX === null) return;
+    const dx = e.changedTouches[0].screenX - touchStartX;
+    if (Math.abs(dx) > 50) {
+      if (dx < 0) goTo(current + 1); else goTo(current - 1);
+    }
+    touchStartX = null;
+  });
+
+  goTo(1);
+</script>
+</body>
+</html>
