@@ -43,6 +43,7 @@
   .topbar{
     display:flex; align-items:center; justify-content:space-between;
     padding:22px 0; border-bottom:1px solid var(--panel-line);
+    gap:20px; flex-wrap:wrap;
   }
   .topbar .brand{
     font-family:'IBM Plex Mono', monospace; font-size:13px; letter-spacing:.12em;
@@ -51,7 +52,16 @@
   .dot{width:8px; height:8px; border-radius:50%; background:var(--ecg); box-shadow:0 0 8px var(--ecg);
     animation:pulse 1.6s ease-in-out infinite;}
   @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:.35;}}
+  .topbar .topbar-right{display:flex; align-items:center; gap:22px;}
   .topbar .status{font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--amber); letter-spacing:.08em;}
+  .topbar .nav-link{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.08em;
+    color:var(--ecg); text-decoration:none; border:1px solid var(--ecg-dim);
+    padding:7px 14px; border-radius:2px; transition:background .15s ease, color .15s ease;
+    white-space:nowrap;
+  }
+  .topbar .nav-link:hover{background:var(--ecg-dim);}
+  .topbar .nav-link:focus-visible{outline:2px solid var(--ecg); outline-offset:2px;}
   /* ---- hero ---- */
   .hero{padding:76px 0 40px; text-align:center;}
   .eyebrow{
@@ -200,7 +210,10 @@
 <body>
   <div class="wrap topbar">
     <div class="brand"><span class="dot"></span>ACLS · CASE DISCUSSION</div>
-    <div class="status">報名開放中</div>
+    <div class="topbar-right">
+      <a class="nav-link" href="StudentList.html">學員名單</a>
+      <div class="status">報名開放中</div>
+    </div>
   </div>
   <div class="hero wrap">
     <div class="eyebrow">Advanced Cardiovascular Life Support</div>
