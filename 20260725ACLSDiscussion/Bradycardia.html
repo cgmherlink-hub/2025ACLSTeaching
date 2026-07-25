@@ -2,6 +2,7 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2025 ACLS 心搏過慢處置流程</title>
     <style>
         body {
@@ -26,8 +27,26 @@
         table.styled-table { width: 100%; border-collapse: collapse; margin: 10px 0; background: #fff; }
         table.styled-table th { background-color: #1e293b; color: #fff; padding: 8px 12px; }
         table.styled-table td { padding: 8px 12px; border-bottom: 1px solid #e2e8f0; }
-        .alert-box { background-color: #fef2f2; border-left: 4px solid #ef4444; padding: 10px 12px; color: #991b1b; }
-        .info-box { background-color: #f0f9ff; border-left: 4px solid #0284c7; padding: 10px 12px; color: #075985; }
+        .alert-box { background-color: #fef2f2; border-left: 4px solid #ef4444; padding: 10px 12px; color: #991b1b; margin-bottom: 15px; }
+        .info-box { background-color: #f0f9ff; border-left: 4px solid #0284c7; padding: 10px 12px; color: #075985; margin-bottom: 15px; }
+
+        /* 新增：圖片與外框樣式 */
+        .image-box {
+            margin: 15px 0;
+            text-align: center;
+        }
+        .image-box img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e2e8f0;
+        }
+        .image-caption {
+            font-size: 9pt;
+            color: #64748b;
+            margin-top: 6px;
+        }
     </style>
 </head>
 <body>
@@ -45,6 +64,13 @@
         <li><strong>心律管理 (Arrhythmia)：</strong>精準電擊能量與心搏過慢藥物階層處置。</li>
         <li><strong>休克與灌注 (Shock & Perfusion)：</strong>腎上腺素精確給藥時機與 MAP ≥ 65 mmHg 目標。</li>
     </ul>
+
+    <!-- 範例圖片 1：處置流程圖 -->
+    <div class="image-box">
+        <!-- 請將 src 替換為您的圖片檔名或網址 -->
+        <img src="bradycardia-algorithm.png" alt="2025 ACLS 心搏過慢處置流程圖">
+        <div class="image-caption">圖 1：2025 ACLS 心搏過慢處置流程圖（Bradycardia Algorithm）</div>
+    </div>
 
     <h2>二、2020 vs. 2025 關鍵矩陣比較</h2>
     <table class="styled-table">
@@ -85,6 +111,13 @@
         1. 經皮心律調節器 (TCP) — 設定速率 60-80 bpm，調整電流達成電性與機械捕獲。<br>
         2. Dopamine 靜脈滴注：5 - 20 mcg/kg/min。<br>
         3. Epinephrine 靜脈滴注：2 - 10 mcg/min（注意：有脈搏者切勿直接 1mg IV push！）。
+    </div>
+
+    <!-- 範例圖片 2：補充圖解 (例如 TCP 設定或心電圖) -->
+    <div class="image-box">
+        <!-- 請將 src 替換為您的圖片檔名或網址 -->
+        <img src="tcp-capture.png" alt="TCP 電性與機械捕獲心電圖示意">
+        <div class="image-caption">圖 2：經皮心律調節器 (TCP) 電性與機械捕獲判讀示意圖</div>
     </div>
 
 </body>
