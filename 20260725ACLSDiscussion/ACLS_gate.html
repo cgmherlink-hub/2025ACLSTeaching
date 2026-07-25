@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 ACLS Discussion 資料入口</title>
+<style>
+  :root {
+    --bg: #f4f5f7;
+    --card-bg: #ffffff;
+    --text: #1f2328;
+    --muted: #6b7280;
+    --accent: #2563eb;
+    --accent-dark: #1d4ed8;
+    --border: #e5e7eb;
+    --danger: #dc2626;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  /* ---------- 密碼畫面 ---------- */
+  #loginScreen {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 40px 36px;
+    width: 100%;
+    max-width: 380px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    text-align: center;
+  }
+  #loginScreen h1 {
+    font-size: 1.3rem;
+    margin: 0 0 6px;
+  }
+  #loginScreen p {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin: 0 0 24px;
+  }
+  #passwordInput {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-bottom: 14px;
+    outline: none;
+  }
+  #passwordInput:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+  }
+  #loginBtn {
+    width: 100%;
+    padding: 12px 14px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+  #loginBtn:hover { background: var(--accent-dark); }
+  #errorMsg {
+    color: var(--danger);
+    font-size: 0.85rem;
+    margin-top: 12px;
+    min-height: 1.2em;
+  }
+
+  /* ---------- 卡片畫面 ---------- */
+  #contentScreen {
+    display: none;
+    width: 100%;
+    max-width: 900px;
+  }
+  #contentScreen h1 {
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  #contentScreen .sub {
+    text-align: center;
+    color: var(--muted);
+    margin-bottom: 32px;
+    font-size: 0.9rem;
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  .card-link {
+    text-decoration: none;
+    color: inherit;
+  }
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px 20px;
+    text-align: center;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+    border-color: var(--accent);
+  }
+  .card .icon {
+    font-size: 2.2rem;
+    margin-bottom: 12px;
+  }
+  .card .title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .card .desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  #logoutBtn {
+    display: block;
+    margin: 32px auto 0;
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 8px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+  }
+  #logoutBtn:hover {
+    color: var(--danger);
+    border-color: var(--danger);
+  }
+</style>
+</head>
+<body>
+
+<!-- 密碼輸入畫面 -->
+<div id="loginScreen">
+  <h1>🔒 資料存取驗證</h1>
+  <p>請輸入密碼以檢視 2026 ACLS Discussion 教學資料</p>
+  <input type="password" id="passwordInput" placeholder="請輸入密碼" autocomplete="off">
+  <button id="loginBtn">進入</button>
+  <div id="errorMsg"></div>
+</div>
+
+<!-- 卡片內容畫面 -->
+<div id="contentScreen">
+  <h1>2026 ACLS Discussion</h1>
+  <div class="sub">請選擇要檢視的組別資料</div>
+  <div class="cards">
+    <a class="card-link" href="30Test.html">
+      <div class="card">
+        <div class="icon">📁</div>
+        <div class="title">30 Test</div>
+        <div class="desc">查看 30Test 組別資料</div>
+      </div>
+    </a>
+    <a class="card-link" href="40Test.html">
+      <div class="card">
+        <div class="icon">📁</div>
+        <div class="title">40 Test</div>
+        <div class="desc">查看 40Test 組別資料</div>
+      </div>
+    </a>
+    <a class="card-link" href="50Test.html">
+      <div class="card">
+        <div class="icon">📁</div>
+        <div class="title">50 Test</div>
+        <div class="desc">查看 50Test 組別資料</div>
+      </div>
+    </a>
+  </div>
+  <button id="logoutBtn">登出</button>
+</div>
+
+<script>
+  const CORRECT_PASSWORD = "jimmy601@hotmail";
+  const SESSION_KEY = "acls_2026_authenticated";
+
+  const loginScreen = document.getElementById('loginScreen');
+  const contentScreen = document.getElementById('contentScreen');
+  const passwordInput = document.getElementById('passwordInput');
+  const loginBtn = document.getElementById('loginBtn');
+  const errorMsg = document.getElementById('errorMsg');
+  const logoutBtn = document.getElementById('logoutBtn');
+
+  function showContent() {
+    loginScreen.style.display = 'none';
+    contentScreen.style.display = 'block';
+  }
+
+  function tryLogin() {
+    if (passwordInput.value === CORRECT_PASSWORD) {
+      sessionStorage.setItem(SESSION_KEY, "1");
+      showContent();
+    } else {
+      errorMsg.textContent = '密碼錯誤，請再試一次';
+      passwordInput.value = '';
+      passwordInput.focus();
+    }
+  }
+
+  loginBtn.addEventListener('click', tryLogin);
+  passwordInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') tryLogin();
+  });
+
+  logoutBtn.addEventListener('click', () => {
+    sessionStorage.removeItem(SESSION_KEY);
+    contentScreen.style.display = 'none';
+    loginScreen.style.display = 'block';
+    passwordInput.value = '';
+    errorMsg.textContent = '';
+  });
+
+  // 若本次瀏覽階段已驗證過，直接顯示內容
+  if (sessionStorage.getItem(SESSION_KEY) === "1") {
+    showContent();
+  }
+</script>
+
+</body>
+</html>
