@@ -29,8 +29,7 @@
         table.styled-table td { padding: 8px 12px; border-bottom: 1px solid #e2e8f0; }
         .alert-box { background-color: #fef2f2; border-left: 4px solid #ef4444; padding: 10px 12px; color: #991b1b; margin-bottom: 15px; }
         .info-box { background-color: #f0f9ff; border-left: 4px solid #0284c7; padding: 10px 12px; color: #075985; margin-bottom: 15px; }
-
-        /* 新增：圖片與外框樣式 */
+        /* 圖片與外框樣式 */
         .image-box {
             margin: 15px 0;
             text-align: center;
@@ -47,16 +46,28 @@
             color: #64748b;
             margin-top: 6px;
         }
+        /* 投影片圖庫 */
+        .slide-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin: 15px 0;
+        }
+        .slide-gallery .image-box {
+            margin: 0;
+            background: #fff;
+            border-radius: 8px;
+            padding: 10px;
+            border: 1px solid #e2e8f0;
+        }
     </style>
 </head>
 <body>
-
     <div class="header">
         <h1>2025 ACLS 心搏過慢處置流程</h1>
         <div class="subtitle">Bradycardia Algorithm for Healthcare Professionals</div>
         <div class="meta">陳進明醫師 | 急診醫學部 | 林口長庚醫院</div>
     </div>
-
     <h2>一、2025 典範轉移：血液動力學的三大支柱</h2>
     <p>2025 年 ACLS 強調機械與電氣生理的最佳化整合：</p>
     <ul>
@@ -64,14 +75,6 @@
         <li><strong>心律管理 (Arrhythmia)：</strong>精準電擊能量與心搏過慢藥物階層處置。</li>
         <li><strong>休克與灌注 (Shock & Perfusion)：</strong>腎上腺素精確給藥時機與 MAP ≥ 65 mmHg 目標。</li>
     </ul>
-
-    <!-- 範例圖片 1：處置流程圖 -->
-    <div class="image-box">
-        <!-- 請將 src 替換為您的圖片檔名或網址 -->
-        <img src="bradycardia-algorithm.png" alt="2025 ACLS 心搏過慢處置流程圖">
-        <div class="image-caption">圖 1：2025 ACLS 心搏過慢處置流程圖（Bradycardia Algorithm）</div>
-    </div>
-
     <h2>二、2020 vs. 2025 關鍵矩陣比較</h2>
     <table class="styled-table">
         <thead>
@@ -99,13 +102,11 @@
             </tr>
         </tbody>
     </table>
-
     <h2>三、關鍵處置流程與藥物指南</h2>
     <div class="info-box">
         <strong>第一線藥物：Atropine (阿托品)</strong><br>
         每次 1 mg IV push，每 3-5 分鐘重複，最大總劑量 3 mg。
     </div>
-
     <div class="alert-box">
         <strong>第二線處置（Atropine 無效時）：</strong><br>
         1. 經皮心律調節器 (TCP) — 設定速率 60-80 bpm，調整電流達成電性與機械捕獲。<br>
@@ -113,12 +114,89 @@
         3. Epinephrine 靜脈滴注：2 - 10 mcg/min（注意：有脈搏者切勿直接 1mg IV push！）。
     </div>
 
-    <!-- 範例圖片 2：補充圖解 (例如 TCP 設定或心電圖) -->
-    <div class="image-box">
-        <!-- 請將 src 替換為您的圖片檔名或網址 -->
-        <img src="tcp-capture.png" alt="TCP 電性與機械捕獲心電圖示意">
-        <div class="image-caption">圖 2：經皮心律調節器 (TCP) 電性與機械捕獲判讀示意圖</div>
+    <h2>四、教學投影片全覽（Bradycardia）</h2>
+    <p>以下為本次討論所使用之投影片，共 20 張，依序排列。</p>
+    <div class="slide-gallery">
+        <div class="image-box">
+            <img src="投影片1.JPG" alt="投影片 1">
+            <div class="image-caption">投影片 1</div>
+        </div>
+        <div class="image-box">
+            <img src="投影片2.JPG" alt="投影片 2">
+            <div class="image-caption">投影片 2</div>
+        </div>
+        <div class="image-box">
+            <img src="投影片3.JPG" alt="投影片 3">
+            <div class="image-caption">投影片 3</div>
+        </div>
+        <div class="image-box">
+            <img src="投影片4.JPG" alt="投影片 4">
+            <div class="image-caption">投影片 4</div>
+        </div>
+        <div class="image-box">
+            <img src="投影片5.JPG" alt="投影片 5">
+            <div class="image-caption">投影片 5</div>
+        </div>
+        <div class="image-box">
+            <img src="投影片6.JPG" alt="投影片 6">
+            <div class="image-caption">投影片 6</div>
+        </div>
+        <div class="image-box">
+            <img src="投影片7.JPG" alt="投影片 7">
+            <div class="image-caption">投影片 7</div>
+        </div>
+        <div class="image-box">
+            <img src="投影片8.JPG" alt="投影片 8">
+            <div class="image-caption">投影片 8</div>
+        </div>
+        <div class="image-box">
+            <img src="投影片9.JPG" alt="投影片 9">
+            <div class="image-caption">投影片 9</div>
+        </div>
+        <div class="image-box">
+            <img src="投影片10.JPG" alt="投影片 10">
+            <div class="image-caption">投影片 10</div>
+        </div>
+        <div class="image-box">
+            <img src="投影片11.JPG" alt="投影片 11">
+            <div class="image-caption">投影片 11</div>
+        </div>
+        <div class="image-box">
+            <img src="投影片12.JPG" alt="投影片 12">
+            <div class="image-caption">投影片 12</div>
+        </div>
+        <div class="image-box">
+            <img src="投影片13.JPG" alt="投影片 13">
+            <div class="image-caption">投影片 13</div>
+        </div>
+        <div class="image-box">
+            <img src="投影片14.JPG" alt="投影片 14">
+            <div class="image-caption">投影片 14</div>
+        </div>
+        <div class="image-box">
+            <img src="投影片15.JPG" alt="投影片 15">
+            <div class="image-caption">投影片 15</div>
+        </div>
+        <div class="image-box">
+            <img src="投影片16.JPG" alt="投影片 16">
+            <div class="image-caption">投影片 16</div>
+        </div>
+        <div class="image-box">
+            <img src="投影片17.JPG" alt="投影片 17">
+            <div class="image-caption">投影片 17</div>
+        </div>
+        <div class="image-box">
+            <img src="投影片18.JPG" alt="投影片 18">
+            <div class="image-caption">投影片 18</div>
+        </div>
+        <div class="image-box">
+            <img src="投影片19.JPG" alt="投影片 19">
+            <div class="image-caption">投影片 19</div>
+        </div>
+        <div class="image-box">
+            <img src="投影片20.JPG" alt="投影片 20">
+            <div class="image-caption">投影片 20</div>
+        </div>
     </div>
-
 </body>
 </html>
