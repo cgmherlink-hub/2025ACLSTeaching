@@ -117,7 +117,6 @@
   .lightbox .prev-btn { left: 24px; }
   .lightbox .next-btn { right: 24px; }
   .lightbox .nav-btn:hover { background: rgba(255,255,255,0.3); }
-
   .broken {
     display: flex;
     align-items: center;
@@ -132,14 +131,11 @@
 </style>
 </head>
 <body>
-
 <header>
   <h1>投影片圖片展示</h1>
-  <p id="status">共 31 張圖片，載入中...</p>
+  <p id="status">共 49 張圖片，載入中...</p>
 </header>
-
 <div class="gallery" id="gallery"></div>
-
 <div class="lightbox" id="lightbox">
   <button class="close-btn" id="closeBtn">&times;</button>
   <button class="nav-btn prev-btn" id="prevBtn">&#8249;</button>
@@ -147,25 +143,22 @@
   <div class="caption" id="lightboxCaption"></div>
   <button class="nav-btn next-btn" id="nextBtn">&#8250;</button>
 </div>
-
 <script>
-  const total = 31;
+  // 使用相對網址：此 HTML 檔案需與投影片圖片放在同一個資料夾（40Test）內
+  const total = 49;
   const files = Array.from({length: total}, (_, i) => `投影片${i + 1}.jpeg`);
   const gallery = document.getElementById('gallery');
   const status = document.getElementById('status');
   let loadedCount = 0;
   let errorCount = 0;
-
   files.forEach((fname, idx) => {
     const card = document.createElement('div');
     card.className = 'card';
     card.dataset.index = idx;
-
     const img = document.createElement('img');
     img.src = fname;
     img.alt = fname;
     img.loading = 'lazy';
-
     img.onload = () => {
       loadedCount++;
       updateStatus();
@@ -178,38 +171,31 @@
       broken.textContent = '圖片無法載入：' + fname;
       img.replaceWith(broken);
     };
-
     const label = document.createElement('div');
     label.className = 'label';
     label.textContent = fname;
-
     card.appendChild(img);
     card.appendChild(label);
     card.addEventListener('click', () => openLightbox(idx));
     gallery.appendChild(card);
   });
-
   function updateStatus() {
     status.textContent = `共 ${total} 張圖片，成功載入 ${loadedCount} 張` + (errorCount ? `，${errorCount} 張載入失敗` : '');
   }
-
   // Lightbox logic
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightboxImg');
   const lightboxCaption = document.getElementById('lightboxCaption');
   let currentIndex = 0;
-
   function openLightbox(idx) {
     currentIndex = idx;
     showImage();
     lightbox.classList.add('active');
   }
-
   function showImage() {
     lightboxImg.src = files[currentIndex];
     lightboxCaption.textContent = `${files[currentIndex]}  (${currentIndex + 1} / ${total})`;
   }
-
   document.getElementById('closeBtn').addEventListener('click', () => {
     lightbox.classList.remove('active');
   });
@@ -231,6 +217,5 @@
     if (e.key === 'ArrowRight') document.getElementById('nextBtn').click();
   });
 </script>
-
 </body>
 </html>
