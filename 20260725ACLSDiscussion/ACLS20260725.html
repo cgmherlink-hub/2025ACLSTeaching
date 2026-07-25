@@ -236,7 +236,6 @@
     border-top:1px solid var(--panel-line); padding:26px 0; text-align:center;
     font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--text-faint); letter-spacing:.05em;
   }
-
   /* ---- ACLS Gate: 密碼保護資料區 ---- */
   #data-gate .sec-head{margin-bottom:32px;}
   .gate-panel{
@@ -302,6 +301,8 @@
       <a class="nav-link" href="0725ACLSSchedule.html">課程表</a>
       <a class="nav-link" href="Airway.html">Airway</a>
       <a class="nav-link" href="Bradycardia.html">Bradycardia</a>
+      <a class="nav-link" href="0726__Stroke_20260725.html">Stroke</a>
+      <a class="nav-link" href="SpecialResuscitation.html">Special Resuscitation</a>
       <a class="nav-link amber" href="#data-gate">🔒 組別資料</a>
     </div>
   </div>
@@ -494,7 +495,6 @@
       </div>
     </div>
   </section>
-
   <!-- ================= ACLS Gate: 密碼保護組別資料 ================= -->
   <section class="wrap" id="data-gate">
     <div class="sec-head">
@@ -502,7 +502,6 @@
       <h2>2026 ACLS Discussion 資料入口</h2>
     </div>
     <div class="gate-panel">
-
       <!-- 密碼輸入畫面 -->
       <div id="gateLoginScreen">
         <div class="lock-icon">🔒</div>
@@ -511,7 +510,6 @@
         <button id="gateLoginBtn">進入</button>
         <div id="gateErrorMsg"></div>
       </div>
-
       <!-- 卡片內容畫面 -->
       <div id="gateContentScreen">
         <div class="gate-cards">
@@ -539,22 +537,17 @@
         </div>
         <button id="gateLogoutBtn">登出</button>
       </div>
-
     </div>
   </section>
-
   <footer>
     ACLS 討論會 · 2026.07.25 · 如有異動請以最新公告為準
   </footer>
-
 <script>
   // ---- 全螢幕切換 ----
   function toggleFullscreen(btn) {
     const panel = btn.closest('.live-panel');
     const frame = panel.querySelector('.slide-frame');
-
     const isCurrentlyFullscreen = document.fullscreenElement || document.webkitFullscreenElement;
-
     if (!isCurrentlyFullscreen) {
       if (frame.requestFullscreen) {
         frame.requestFullscreen();
@@ -573,7 +566,6 @@
       }
     }
   }
-
   function updateFsButtons() {
     const fsElement = document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
     document.querySelectorAll('.live-panel').forEach(panel => {
@@ -589,28 +581,23 @@
       }
     });
   }
-
   document.addEventListener('fullscreenchange', updateFsButtons);
   document.addEventListener('webkitfullscreenchange', updateFsButtons);
   document.addEventListener('msfullscreenchange', updateFsButtons);
-
   // ---- 密碼保護組別資料 ----
   (function(){
     const CORRECT_PASSWORD = "jimmy601@hotmail";
     const SESSION_KEY = "acls_2026_authenticated";
-
     const loginScreen = document.getElementById('gateLoginScreen');
     const contentScreen = document.getElementById('gateContentScreen');
     const passwordInput = document.getElementById('gatePasswordInput');
     const loginBtn = document.getElementById('gateLoginBtn');
     const errorMsg = document.getElementById('gateErrorMsg');
     const logoutBtn = document.getElementById('gateLogoutBtn');
-
     function showContent() {
       loginScreen.style.display = 'none';
       contentScreen.style.display = 'block';
     }
-
     function tryLogin() {
       if (passwordInput.value === CORRECT_PASSWORD) {
         sessionStorage.setItem(SESSION_KEY, "1");
@@ -621,12 +608,10 @@
         passwordInput.focus();
       }
     }
-
     loginBtn.addEventListener('click', tryLogin);
     passwordInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') tryLogin();
     });
-
     logoutBtn.addEventListener('click', () => {
       sessionStorage.removeItem(SESSION_KEY);
       contentScreen.style.display = 'none';
@@ -634,7 +619,6 @@
       passwordInput.value = '';
       errorMsg.textContent = '';
     });
-
     if (sessionStorage.getItem(SESSION_KEY) === "1") {
       showContent();
     }
