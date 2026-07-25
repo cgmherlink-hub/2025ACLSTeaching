@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>投影片圖片展示</title>
+<style>
+  :root {
+    --bg: #f4f5f7;
+    --card-bg: #ffffff;
+    --text: #1f2328;
+    --muted: #6b7280;
+    --accent: #2563eb;
+    --border: #e5e7eb;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+  header {
+    padding: 24px 32px;
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  header h1 {
+    margin: 0 0 4px;
+    font-size: 1.5rem;
+  }
+  header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+    padding: 24px 32px;
+  }
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  }
+  .card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+    background: #eee;
+  }
+  .card .label {
+    padding: 8px 10px;
+    font-size: 0.85rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+  /* Lightbox */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 100;
+  }
+  .lightbox.active { display: flex; }
+  .lightbox img {
+    max-width: 90vw;
+    max-height: 80vh;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  }
+  .lightbox .caption {
+    color: #fff;
+    margin-top: 12px;
+    font-size: 1rem;
+  }
+  .lightbox .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 32px;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+  .lightbox .nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    padding: 12px 16px;
+    cursor: pointer;
+    border-radius: 6px;
+  }
+  .lightbox .prev-btn { left: 24px; }
+  .lightbox .next-btn { right: 24px; }
+  .lightbox .nav-btn:hover { background: rgba(255,255,255,0.3); }
+
+  .broken {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+    color: #b91c1c;
+    background: #fff1f2;
+    font-size: 0.8rem;
+    text-align: center;
+    padding: 8px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>投影片圖片展示</h1>
+  <p id="status">共 31 張圖片，載入中...</p>
+</header>
+
+<div class="gallery" id="gallery"></div>
+
+<div class="lightbox" id="lightbox">
+  <button class="close-btn" id="closeBtn">&times;</button>
+  <button class="nav-btn prev-btn" id="prevBtn">&#8249;</button>
+  <img id="lightboxImg" src="" alt="">
+  <div class="caption" id="lightboxCaption"></div>
+  <button class="nav-btn next-btn" id="nextBtn">&#8250;</button>
+</div>
+
+<script>
+  const total = 31;
+  const files = Array.from({length: total}, (_, i) => `投影片${i + 1}.JPG`);
+  const gallery = document.getElementById('gallery');
+  const status = document.getElementById('status');
+  let loadedCount = 0;
+  let errorCount = 0;
+
+  files.forEach((fname, idx) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.dataset.index = idx;
+
+    const img = document.createElement('img');
+    img.src = fname;
+    img.alt = fname;
+    img.loading = 'lazy';
+
+    img.onload = () => {
+      loadedCount++;
+      updateStatus();
+    };
+    img.onerror = () => {
+      errorCount++;
+      updateStatus();
+      const broken = document.createElement('div');
+      broken.className = 'broken';
+      broken.textContent = '圖片無法載入：' + fname;
+      img.replaceWith(broken);
+    };
+
+    const label = document.createElement('div');
+    label.className = 'label';
+    label.textContent = fname;
+
+    card.appendChild(img);
+    card.appendChild(label);
+    card.addEventListener('click', () => openLightbox(idx));
+    gallery.appendChild(card);
+  });
+
+  function updateStatus() {
+    status.textContent = `共 ${total} 張圖片，成功載入 ${loadedCount} 張` + (errorCount ? `，${errorCount} 張載入失敗` : '');
+  }
+
+  // Lightbox logic
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCaption = document.getElementById('lightboxCaption');
+  let currentIndex = 0;
+
+  function openLightbox(idx) {
+    currentIndex = idx;
+    showImage();
+    lightbox.classList.add('active');
+  }
+
+  function showImage() {
+    lightboxImg.src = files[currentIndex];
+    lightboxCaption.textContent = `${files[currentIndex]}  (${currentIndex + 1} / ${total})`;
+  }
+
+  document.getElementById('closeBtn').addEventListener('click', () => {
+    lightbox.classList.remove('active');
+  });
+  document.getElementById('prevBtn').addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + total) % total;
+    showImage();
+  });
+  document.getElementById('nextBtn').addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % total;
+    showImage();
+  });
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) lightbox.classList.remove('active');
+  });
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('active')) return;
+    if (e.key === 'Escape') lightbox.classList.remove('active');
+    if (e.key === 'ArrowLeft') document.getElementById('prevBtn').click();
+    if (e.key === 'ArrowRight') document.getElementById('nextBtn').click();
+  });
+</script>
+
+</body>
+</html>
